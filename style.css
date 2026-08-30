@@ -1,4 +1,755 @@
-/* ==========================================
-   CODEFORGE V2
-   PROFESSIONAL DARK EDITOR
-   ========================================== */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #070a0f;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app {
+  width: 100%;
+  height: 100vh;
+  background: #070a0f;
+}
+
+
+/* ================================
+   TOPBAR
+================================ */
+
+.topbar {
+  height: 58px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  background: #0b0f15;
+  border-bottom: 1px solid #202833;
+  position: relative;
+  z-index: 20;
+}
+
+.brand-area {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 160px;
+}
+
+.icon-btn,
+.close-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #29323d;
+  border-radius: 8px;
+  background: #111720;
+  color: #ffffff;
+  font-size: 19px;
+}
+
+.icon-btn:active,
+.close-btn:active {
+  transform: scale(.95);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.brand-mark {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  background: #087cff;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.brand-mark.small {
+  width: 28px;
+  height: 28px;
+}
+
+.current-project {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 28%;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #dce3eb;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.online-dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #35d276;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.top-actions button {
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.secondary-btn {
+  border: 1px solid #29323d;
+  background: #111720;
+  color: #ffffff;
+}
+
+.primary-btn {
+  border: 1px solid #087cff;
+  background: #087cff;
+  color: #ffffff;
+}
+
+.top-actions button:active {
+  transform: scale(.97);
+}
+
+
+/* ================================
+   SIDE MENU
+================================ */
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 290px;
+  max-width: 85vw;
+  height: 100vh;
+  padding: 17px 14px;
+  background: #0b0f15;
+  border-right: 1px solid #29323d;
+  z-index: 100;
+  transform: translateX(-105%);
+  transition: transform .22s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-menu.open {
+  transform: translateX(0);
+}
+
+.menu-top {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 19px;
+}
+
+.menu-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.new-project-btn {
+  width: 100%;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 23px;
+  border: 0;
+  border-radius: 8px;
+  background: #087cff;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.new-project-btn span:first-child {
+  font-size: 18px;
+}
+
+.new-project-btn:active {
+  transform: scale(.98);
+}
+
+.section-title {
+  margin: 0 5px 9px;
+  color: #707b88;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.project-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: auto;
+}
+
+.project-item {
+  width: 100%;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: #c8d0d9;
+  text-align: left;
+  font-size: 12px;
+}
+
+.project-item:hover,
+.project-item.active {
+  background: #131a23;
+  border-color: #26313d;
+  color: #ffffff;
+}
+
+.project-dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #087cff;
+}
+
+.project-item-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.menu-bottom {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #202833;
+}
+
+.delete-btn {
+  width: 100%;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 11px;
+  border: 1px solid #493039;
+  border-radius: 8px;
+  background: #171015;
+  color: #ff9ca9;
+  font-size: 12px;
+}
+
+.delete-btn:active {
+  transform: scale(.98);
+}
+
+
+/* ================================
+   OVERLAY
+================================ */
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(0, 0, 0, .58);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease;
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* ================================
+   WORKSPACE
+================================ */
+
+.workspace {
+  width: 100%;
+  height: calc(100vh - 58px);
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* ================================
+   EDITOR
+================================ */
+
+.editor-panel {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: #080c12;
+}
+
+.editor-toolbar {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #0b1017;
+  border-bottom: 1px solid #202833;
+}
+
+.file-explorer {
+  display: flex;
+  align-items: stretch;
+  height: 42px;
+  max-width: calc(100% - 70px);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.file-explorer::-webkit-scrollbar {
+  display: none;
+}
+
+.file {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 12px;
+  border: 0;
+  border-right: 1px solid #202833;
+  background: transparent;
+  color: #75808d;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.file.active {
+  background: #101720;
+  color: #ffffff;
+  box-shadow: inset 0 -2px 0 #087cff;
+}
+
+.file-icon {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.language {
+  padding: 0 12px;
+  color: #75808d;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.editor-wrapper {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.line-numbers {
+  width: 42px;
+  flex-shrink: 0;
+  padding: 18px 7px 18px 0;
+  background: #080c12;
+  color: #46515e;
+  text-align: right;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.65;
+  overflow: hidden;
+  user-select: none;
+}
+
+#codeEditor {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  resize: none;
+  outline: none;
+  border: 0;
+  padding: 18px 15px;
+  background: #080c12;
+  color: #f4f7fa;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.65;
+  tab-size: 2;
+  white-space: pre;
+  overflow: auto;
+}
+
+#codeEditor::placeholder {
+  color: #4f5a66;
+}
+
+
+/* ================================
+   CHAT
+================================ */
+
+.chat-panel {
+  flex-shrink: 0;
+  padding: 10px 12px 12px;
+  background: #0b1017;
+  border-top: 1px solid #202833;
+}
+
+.chat-header {
+  margin-bottom: 7px;
+}
+
+.chat-header div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.chat-header strong {
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.chat-header span {
+  color: #697583;
+  font-size: 10px;
+}
+
+.chat-box {
+  position: relative;
+  width: 100%;
+}
+
+#chatInput {
+  width: 100%;
+  min-height: 48px;
+  max-height: 110px;
+  display: block;
+  resize: vertical;
+  outline: none;
+  border: 1px solid #29323d;
+  border-radius: 9px;
+  padding: 11px 50px 11px 12px;
+  background: #080c12;
+  color: #ffffff;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+#chatInput::placeholder {
+  color: #5d6875;
+}
+
+.send-btn {
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 7px;
+  background: #087cff;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.send-btn:active {
+  transform: scale(.93);
+}
+
+
+/* ================================
+   TOAST
+================================ */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translate(-50%, 20px);
+  z-index: 1000;
+  max-width: 85%;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #087cff;
+  color: #ffffff;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: .2s ease;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+
+/* ================================
+   MODAL
+================================ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, .78);
+}
+
+.modal {
+  width: 100%;
+  max-width: 430px;
+  padding: 20px;
+  border: 1px solid #29323d;
+  border-radius: 13px;
+  background: #0d1117;
+  color: #ffffff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #29323d;
+  border-radius: 7px;
+  background: #111720;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.modal p {
+  margin: 0 0 18px;
+  color: #7c8794;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.modal label {
+  display: block;
+  margin: 12px 0 6px;
+  color: #b9c2cc;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.modal input,
+.modal select {
+  width: 100%;
+  height: 42px;
+  padding: 0 11px;
+  border: 1px solid #29323d;
+  border-radius: 8px;
+  outline: none;
+  background: #080c12;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.modal-create {
+  width: 100%;
+  height: 42px;
+  margin-top: 18px;
+  border: 0;
+  border-radius: 8px;
+  background: #087cff;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+
+  .topbar {
+    height: 54px;
+    padding: 0 8px;
+  }
+
+  .workspace {
+    height: calc(100vh - 54px);
+  }
+
+  .brand-area {
+    min-width: auto;
+  }
+
+  .brand > span:last-child {
+    display: none;
+  }
+
+  .current-project {
+    max-width: 30%;
+    font-size: 10px;
+  }
+
+  .top-actions {
+    gap: 4px;
+  }
+
+  .top-actions button {
+    height: 32px;
+    padding: 0 8px;
+    font-size: 9px;
+  }
+
+  .editor-toolbar,
+  .file-explorer {
+    height: 38px;
+    min-height: 38px;
+  }
+
+  .file {
+    height: 38px;
+    padding: 0 9px;
+    font-size: 10px;
+  }
+
+  .language {
+    display: none;
+  }
+
+  .line-numbers {
+    width: 34px;
+    padding-right: 6px;
+    font-size: 11px;
+  }
+
+  #codeEditor {
+    padding: 14px 10px;
+    font-size: 11px;
+  }
+
+  .chat-panel {
+    padding: 8px;
+  }
+
+  .chat-header {
+    margin-bottom: 6px;
+  }
+
+  .chat-header span {
+    display: none;
+  }
+
+  #chatInput {
+    min-height: 45px;
+    font-size: 10px;
+  }
+
+  .side-menu {
+    width: 275px;
+  }
+
+}
+
+
+/* ================================
+   SMALL HEIGHT
+================================ */
+
+@media (max-height: 650px) {
+
+  .chat-panel {
+    padding: 6px 8px;
+  }
+
+  .chat-header {
+    display: none;
+  }
+
+  #chatInput {
+    min-height: 40px;
+    max-height: 70px;
+  }
+
+  .send-btn {
+    width: 30px;
+    height: 30px;
+  }
+
+   }
