@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>CodeForge</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
 </head>
 
 <body>
@@ -14,106 +23,182 @@
   <div class="app">
 
     <!-- SIDEBAR -->
+
     <aside class="sidebar">
 
-      <button class="logo" id="homeBtn" type="button">
-  <div class="logo-icon">&lt;/&gt;</div>
-  <span>CodeForge</span>
+      <button
+        class="logo"
+        id="homeBtn"
+        type="button"
+      >
+
+        <div class="logo-icon">
+          &lt;/&gt;
+        </div>
+
+        <span>CodeForge</span>
+
       </button>
 
-      <button class="new-project" id="newProject" type="button">
-  + Novo projeto
+
+      <button
+        class="new-project"
+        id="newProject"
+        type="button"
+      >
+        + Novo projeto
       </button>
 
-      <div class="section-title">PROJETO</div>
 
-      <div class="file active">
-        <span>📄</span>
-        index.html
+      <div class="section-title">
+        PROJECT
       </div>
 
-      <div class="file">
-        <span>🎨</span>
-        style.css
+
+      <!-- FILE EXPLORER -->
+
+      <div
+        class="file-explorer"
+        id="fileExplorer"
+      >
+
+        <!-- Os ficheiros serão criados pelo JavaScript -->
+
       </div>
 
-      <div class="file">
-        <span>⚡</span>
-        app.js
-      </div>
+
+      <button
+        class="new-file-button"
+        id="newFileBtn"
+        type="button"
+      >
+        + Novo ficheiro
+      </button>
+
 
       <div class="sidebar-bottom">
-        <button>⚙️ Configurações</button>
-        <button>❔ Ajuda</button>
+
+        <button
+          id="settingsBtn"
+          type="button"
+        >
+          Configurações
+        </button>
+
+        <button
+          id="helpBtn"
+          type="button"
+        >
+          Ajuda
+        </button>
+
       </div>
 
     </aside>
 
 
     <!-- MAIN -->
+
     <main class="main">
 
-      <!-- HEADER -->
+
+      <!-- TOPBAR -->
+
       <header class="topbar">
 
-        <div class="project-name">
+        <div
+          class="project-name"
+          id="projectName"
+        >
+
           <span class="status"></span>
+
           Meu Projeto
+
         </div>
 
+
         <div class="top-actions">
-          <button id="previewBtn">Preview</button>
-          <button class="save-btn" id="saveBtn">Salvar</button>
+
+          <button
+            id="previewBtn"
+            type="button"
+          >
+            Preview
+          </button>
+
+
+          <button
+            class="save-btn"
+            id="saveBtn"
+            type="button"
+          >
+            Salvar
+          </button>
+
         </div>
 
       </header>
 
 
       <!-- EDITOR -->
+
       <section class="editor-area">
 
         <div class="editor-header">
-          <span>index.html</span>
-          <span class="language">HTML</span>
+
+          <span id="currentFileName">
+            index.html
+          </span>
+
+          <span
+            class="language"
+            id="currentLanguage"
+          >
+            HTML
+          </span>
+
         </div>
 
-        <textarea id="codeEditor" spellcheck="false"><!DOCTYPE html>
-<html lang="pt">
-<head>
-  <meta charset="UTF-8">
-  <title>Meu Projeto</title>
-</head>
 
-<body>
-
-  <h1>Bem-vindo ao CodeForge</h1>
-
-  <p>Comece a construir o seu projeto.</p>
-
-</body>
-</html></textarea>
+        <textarea
+          id="codeEditor"
+          spellcheck="false"
+        ></textarea>
 
       </section>
 
 
       <!-- CHAT -->
+
       <section class="chat">
 
         <div class="chat-title">
-          <div>
-            <strong>Code Chat</strong>
-            <small>Insira código ou instruções</small>
-          </div>
+
+          <strong>
+            Code Chat
+          </strong>
+
+          <small>
+            Cole código para importar para o projeto
+          </small>
+
         </div>
+
 
         <div class="chat-input-area">
 
           <textarea
             id="chatInput"
-            placeholder="Cole aqui o código ou escreva uma instrução..."
+            placeholder="Cole aqui o código..."
           ></textarea>
 
-          <button id="sendBtn" class="send-btn">
+
+          <button
+            id="sendBtn"
+            class="send-btn"
+            type="button"
+          >
             ➤
           </button>
 
@@ -123,7 +208,10 @@
 
     </main>
 
-  <script src="app.js?v=3"></script>
+  </div>
+
+
+  <script src="app.js?v=4"></script>
 
 </body>
-        </html>
+</html>
