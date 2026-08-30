@@ -516,10 +516,20 @@ previewBtn.addEventListener(
 // NEW PROJECT BUTTON
 // ==========================================
 
-newProjectBtn.addEventListener(
-  "click",
-  openNewProjectWindow
-);
+if (newProjectBtn) {
+
+  newProjectBtn.addEventListener(
+    "click",
+    (event) => {
+
+      event.preventDefault();
+
+      openNewProjectWindow();
+
+    }
+  );
+
+}
 
 
 // ==========================================
