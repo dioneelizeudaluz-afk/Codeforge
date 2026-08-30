@@ -737,7 +737,59 @@ function escapeHTML(value) {
     .replace(/'/g, "&#039;");
 
 }
+// ==========================================
+// FILE EXPLORER
+// ==========================================
 
+const fileElements = document.querySelectorAll(".file");
+
+fileElements.forEach((fileElement) => {
+
+  fileElement.addEventListener("click", () => {
+
+    // Guardar o ficheiro atual antes de mudar
+    currentProject.files[
+      currentProject.currentFile
+    ] = codeEditor.value;
+
+
+    // Descobrir o nome do ficheiro
+    const fileName =
+      fileElement.textContent.trim();
+
+
+    // Verificar se o ficheiro existe
+    if (
+      currentProject.files[fileName] === undefined
+    ) {
+
+      currentProject.files[fileName] = "";
+
+    }
+
+
+    // Mudar ficheiro atual
+    currentProject.currentFile =
+      fileName;
+
+
+    // Mostrar o conteúdo
+    codeEditor.value =
+      currentProject.files[fileName];
+
+
+    // Atualizar visual
+    fileElements.forEach((item) => {
+
+      item.classList.remove("active");
+
+    });
+
+    fileElement.classList.add("active");
+
+  });
+
+});
 
 // ==========================================
 // START
