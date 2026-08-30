@@ -4,38 +4,48 @@
 
 html,
 body {
-  margin: 0;
   width: 100%;
   height: 100%;
+  margin: 0;
   overflow: hidden;
-  background: #070a0f;
-  color: #ffffff;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-  -webkit-tap-highlight-color: transparent;
+  background: #080b10;
+  color: #f3f5f7;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
 }
 
 button,
 textarea {
-  font: inherit;
+  font-family: inherit;
 }
 
 button {
-  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
+
+
+/* =================================
+   APP
+================================= */
 
 .app {
   width: 100%;
   height: 100vh;
-  background: #070a0f;
+  background: #080b10;
 }
 
 
-/* ================================
+/* =================================
    TOPBAR
-================================ */
+================================= */
 
 .topbar {
   height: 58px;
@@ -43,9 +53,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 14px;
+  padding: 0 16px;
   background: #0b0f15;
-  border-bottom: 1px solid #202833;
+  border-bottom: 1px solid #1d2530;
   position: relative;
   z-index: 20;
 }
@@ -53,51 +63,51 @@ button {
 .brand-area {
   display: flex;
   align-items: center;
-  gap: 9px;
-  min-width: 160px;
+  gap: 10px;
 }
 
 .icon-btn,
 .close-btn {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #29323d;
   border-radius: 8px;
   background: #111720;
-  color: #ffffff;
-  font-size: 19px;
+  color: #dce2e8;
+  font-size: 17px;
 }
 
 .icon-btn:active,
 .close-btn:active {
-  transform: scale(.95);
+  transform: scale(.96);
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   padding: 0;
   border: 0;
   background: transparent;
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 700;
+  color: #f5f7f9;
+  font-size: 14px;
+  font-weight: 650;
 }
 
 .brand-mark {
-  width: 30px;
-  height: 30px;
+  width: 29px;
+  height: 29px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 7px;
   background: #087cff;
   color: #ffffff;
-  font-size: 11px;
+  font-family: monospace;
+  font-size: 10px;
   font-weight: 700;
 }
 
@@ -110,24 +120,24 @@ button {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  max-width: 28%;
   display: flex;
   align-items: center;
   gap: 7px;
-  color: #dce3eb;
-  font-size: 12px;
-  font-weight: 600;
+  max-width: 30%;
+  color: #c8d0d8;
+  font-size: 11px;
+  font-weight: 550;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .online-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: #35d276;
+  background: #39c879;
 }
 
 .top-actions {
@@ -137,17 +147,17 @@ button {
 }
 
 .top-actions button {
-  height: 34px;
+  height: 33px;
   padding: 0 12px;
   border-radius: 7px;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
 }
 
 .secondary-btn {
   border: 1px solid #29323d;
   background: #111720;
-  color: #ffffff;
+  color: #dfe5ea;
 }
 
 .primary-btn {
@@ -161,25 +171,25 @@ button {
 }
 
 
-/* ================================
+/* =================================
    SIDE MENU
-================================ */
+================================= */
 
 .side-menu {
   position: fixed;
   top: 0;
   left: 0;
-  width: 290px;
-  max-width: 85vw;
-  height: 100vh;
-  padding: 17px 14px;
-  background: #0b0f15;
-  border-right: 1px solid #29323d;
   z-index: 100;
-  transform: translateX(-105%);
-  transition: transform .22s ease;
+  width: 276px;
+  max-width: 84vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  padding: 16px 14px;
+  background: #0b0f15;
+  border-right: 1px solid #252e39;
+  transform: translateX(-105%);
+  transition: transform .22s ease;
 }
 
 .side-menu.open {
@@ -187,7 +197,7 @@ button {
 }
 
 .menu-top {
-  height: 42px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -198,75 +208,87 @@ button {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 15px;
-  font-weight: 700;
+  color: #f4f6f8;
+  font-size: 14px;
+  font-weight: 650;
 }
 
 .new-project-btn {
   width: 100%;
-  height: 42px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 23px;
+  margin-bottom: 22px;
   border: 0;
   border-radius: 8px;
   background: #087cff;
   color: #ffffff;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 650;
 }
 
 .new-project-btn span:first-child {
-  font-size: 18px;
+  font-size: 17px;
+  font-weight: 400;
 }
 
 .new-project-btn:active {
-  transform: scale(.98);
+  transform: scale(.985);
+}
+
+
+/* =================================
+   MENU SECTIONS
+================================= */
+
+.menu-section {
+  margin-bottom: 22px;
 }
 
 .section-title {
   margin: 0 5px 9px;
-  color: #707b88;
-  font-size: 10px;
+  color: #65717e;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: .08em;
+  letter-spacing: .09em;
 }
 
 .project-list {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 3px;
+  max-height: 170px;
   overflow-y: auto;
 }
 
 .project-item {
   width: 100%;
-  min-height: 42px;
+  min-height: 38px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 9px 10px;
+  gap: 9px;
+  padding: 7px 9px;
   border: 1px solid transparent;
   border-radius: 7px;
   background: transparent;
-  color: #c8d0d9;
+  color: #aeb8c2;
   text-align: left;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .project-item:hover,
 .project-item.active {
-  background: #131a23;
-  border-color: #26313d;
-  color: #ffffff;
+  background: #121821;
+  border-color: #242e39;
+  color: #f2f5f7;
 }
 
 .project-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   flex-shrink: 0;
   border-radius: 50%;
   background: #087cff;
@@ -278,34 +300,92 @@ button {
   text-overflow: ellipsis;
 }
 
+
+/* =================================
+   MENU FILES
+================================= */
+
+.files-section {
+  margin-top: 2px;
+}
+
+.menu-files {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.menu-file {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 9px;
+  border-radius: 6px;
+  color: #9faab5;
+  font-family:
+    "Courier New",
+    Consolas,
+    monospace;
+  font-size: 10px;
+}
+
+.menu-file:hover {
+  background: #111720;
+  color: #e8edf1;
+}
+
+.menu-file-icon {
+  width: 18px;
+  text-align: center;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.html-icon {
+  color: #f29c57;
+}
+
+.css-icon {
+  color: #63a9ff;
+}
+
+.js-icon {
+  color: #e7c75e;
+}
+
+
+/* =================================
+   DELETE
+================================= */
+
 .menu-bottom {
   margin-top: auto;
-  padding-top: 15px;
-  border-top: 1px solid #202833;
+  padding-top: 13px;
+  border-top: 1px solid #1d2530;
 }
 
 .delete-btn {
   width: 100%;
-  min-height: 42px;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 0 11px;
-  border: 1px solid #493039;
-  border-radius: 8px;
-  background: #171015;
-  color: #ff9ca9;
-  font-size: 12px;
+  height: 37px;
+  border: 1px solid #35252b;
+  border-radius: 7px;
+  background: transparent;
+  color: #a9828a;
+  font-size: 10px;
+  text-align: left;
+  padding: 0 10px;
 }
 
-.delete-btn:active {
-  transform: scale(.98);
+.delete-btn:hover {
+  background: #151014;
+  color: #d79aa4;
 }
 
 
-/* ================================
+/* =================================
    OVERLAY
-================================ */
+================================= */
 
 .menu-overlay {
   position: fixed;
@@ -323,9 +403,9 @@ button {
 }
 
 
-/* ================================
+/* =================================
    WORKSPACE
-================================ */
+================================= */
 
 .workspace {
   width: 100%;
@@ -335,9 +415,9 @@ button {
 }
 
 
-/* ================================
+/* =================================
    EDITOR
-================================ */
+================================= */
 
 .editor-panel {
   flex: 1;
@@ -348,19 +428,20 @@ button {
 }
 
 .editor-toolbar {
-  min-height: 42px;
+  height: 40px;
+  min-height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: #0b1017;
-  border-bottom: 1px solid #202833;
+  border-bottom: 1px solid #1d2530;
 }
 
 .file-explorer {
+  height: 40px;
+  max-width: calc(100% - 65px);
   display: flex;
   align-items: stretch;
-  height: 42px;
-  max-width: calc(100% - 70px);
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -370,36 +451,45 @@ button {
 }
 
 .file {
-  height: 42px;
+  height: 40px;
   display: flex;
   align-items: center;
   gap: 7px;
-  padding: 0 12px;
+  padding: 0 11px;
   border: 0;
-  border-right: 1px solid #202833;
+  border-right: 1px solid #1d2530;
   background: transparent;
-  color: #75808d;
-  font-size: 11px;
+  color: #697581;
+  font-family:
+    "Courier New",
+    Consolas,
+    monospace;
+  font-size: 10px;
   white-space: nowrap;
 }
 
 .file.active {
   background: #101720;
-  color: #ffffff;
-  box-shadow: inset 0 -2px 0 #087cff;
+  color: #dce2e8;
+  box-shadow:
+    inset 0 -2px 0 #087cff;
 }
 
 .file-icon {
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 9px;
 }
 
 .language {
-  padding: 0 12px;
-  color: #75808d;
+  padding: 0 11px;
+  color: #66717d;
+  font-family: monospace;
   font-size: 9px;
-  white-space: nowrap;
 }
+
+
+/* =================================
+   CODE EDITOR
+================================= */
 
 .editor-wrapper {
   flex: 1;
@@ -411,12 +501,15 @@ button {
 .line-numbers {
   width: 42px;
   flex-shrink: 0;
-  padding: 18px 7px 18px 0;
+  padding: 17px 7px 17px 0;
   background: #080c12;
-  color: #46515e;
+  color: #3f4955;
   text-align: right;
-  font-family: "Courier New", Consolas, monospace;
-  font-size: 12px;
+  font-family:
+    "Courier New",
+    Consolas,
+    monospace;
+  font-size: 11px;
   line-height: 1.65;
   overflow: hidden;
   user-select: none;
@@ -430,51 +523,52 @@ button {
   resize: none;
   outline: none;
   border: 0;
-  padding: 18px 15px;
+  padding: 17px 15px;
   background: #080c12;
-  color: #f4f7fa;
-  font-family: "Courier New", Consolas, monospace;
-  font-size: 12px;
+  color: #e8edf2;
+  caret-color: #ffffff;
+  font-family:
+    "Courier New",
+    Consolas,
+    monospace;
+  font-size: 11px;
   line-height: 1.65;
   tab-size: 2;
   white-space: pre;
-  overflow: auto;
 }
 
 #codeEditor::placeholder {
-  color: #4f5a66;
+  color: #46515f;
 }
 
 
-/* ================================
+/* =================================
    CHAT
-================================ */
+================================= */
 
 .chat-panel {
   flex-shrink: 0;
-  padding: 10px 12px 12px;
+  padding: 10px 13px 12px;
   background: #0b1017;
-  border-top: 1px solid #202833;
+  border-top: 1px solid #1d2530;
 }
 
 .chat-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 7px;
 }
 
-.chat-header div {
-  display: flex;
-  align-items: center;
-  gap: 9px;
+.chat-title {
+  color: #e5eaf0;
+  font-size: 11px;
+  font-weight: 650;
 }
 
-.chat-header strong {
-  color: #ffffff;
-  font-size: 12px;
-}
-
-.chat-header span {
-  color: #697583;
-  font-size: 10px;
+.chat-description {
+  color: #65717d;
+  font-size: 9px;
 }
 
 .chat-box {
@@ -484,36 +578,39 @@ button {
 
 #chatInput {
   width: 100%;
-  min-height: 48px;
-  max-height: 110px;
+  min-height: 46px;
+  max-height: 90px;
   display: block;
   resize: vertical;
   outline: none;
   border: 1px solid #29323d;
-  border-radius: 9px;
-  padding: 11px 50px 11px 12px;
+  border-radius: 8px;
+  padding: 10px 48px 10px 11px;
   background: #080c12;
-  color: #ffffff;
-  font-family: "Courier New", Consolas, monospace;
-  font-size: 11px;
+  color: #e7ecf1;
+  font-family:
+    "Courier New",
+    Consolas,
+    monospace;
+  font-size: 10px;
   line-height: 1.5;
 }
 
 #chatInput::placeholder {
-  color: #5d6875;
+  color: #4d5865;
 }
 
 .send-btn {
   position: absolute;
-  right: 7px;
-  bottom: 7px;
-  width: 34px;
-  height: 34px;
+  right: 6px;
+  bottom: 6px;
+  width: 32px;
+  height: 32px;
   border: 0;
   border-radius: 7px;
   background: #087cff;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .send-btn:active {
@@ -521,26 +618,26 @@ button {
 }
 
 
-/* ================================
+/* =================================
    TOAST
-================================ */
+================================= */
 
 .toast {
   position: fixed;
   left: 50%;
-  bottom: 20px;
-  transform: translate(-50%, 20px);
+  bottom: 18px;
   z-index: 1000;
+  transform: translate(-50%, 15px);
   max-width: 85%;
-  padding: 10px 16px;
-  border-radius: 8px;
+  padding: 9px 15px;
+  border-radius: 7px;
   background: #087cff;
   color: #ffffff;
-  font-size: 12px;
+  font-size: 10px;
   opacity: 0;
   visibility: hidden;
-  transition: .2s ease;
   pointer-events: none;
+  transition: .2s ease;
 }
 
 .toast.show {
@@ -550,9 +647,9 @@ button {
 }
 
 
-/* ================================
+/* =================================
    MODAL
-================================ */
+================================= */
 
 .modal-overlay {
   position: fixed;
@@ -567,81 +664,83 @@ button {
 
 .modal {
   width: 100%;
-  max-width: 430px;
+  max-width: 410px;
   padding: 20px;
   border: 1px solid #29323d;
-  border-radius: 13px;
+  border-radius: 12px;
   background: #0d1117;
   color: #ffffff;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, .45);
 }
 
 .modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 }
 
 .modal-header h2 {
   margin: 0;
-  font-size: 17px;
+  color: #f2f5f8;
+  font-size: 16px;
 }
 
 .modal-close {
-  width: 32px;
-  height: 32px;
+  width: 31px;
+  height: 31px;
   border: 1px solid #29323d;
   border-radius: 7px;
   background: #111720;
-  color: #ffffff;
-  font-size: 20px;
+  color: #d7dde3;
+  font-size: 19px;
 }
 
 .modal p {
-  margin: 0 0 18px;
-  color: #7c8794;
-  font-size: 11px;
+  margin: 0 0 17px;
+  color: #6f7a86;
+  font-size: 10px;
   line-height: 1.5;
 }
 
 .modal label {
   display: block;
   margin: 12px 0 6px;
-  color: #b9c2cc;
-  font-size: 11px;
+  color: #aeb7c0;
+  font-size: 10px;
   font-weight: 600;
 }
 
 .modal input,
 .modal select {
   width: 100%;
-  height: 42px;
-  padding: 0 11px;
+  height: 40px;
+  padding: 0 10px;
   border: 1px solid #29323d;
-  border-radius: 8px;
+  border-radius: 7px;
   outline: none;
   background: #080c12;
-  color: #ffffff;
-  font-size: 12px;
+  color: #e8edf2;
+  font-size: 11px;
 }
 
 .modal-create {
   width: 100%;
-  height: 42px;
+  height: 40px;
   margin-top: 18px;
   border: 0;
-  border-radius: 8px;
+  border-radius: 7px;
   background: #087cff;
   color: #ffffff;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 650;
 }
 
 
-/* ================================
+/* =================================
    MOBILE
-================================ */
+================================= */
 
 @media (max-width: 600px) {
 
@@ -654,17 +753,13 @@ button {
     height: calc(100vh - 54px);
   }
 
-  .brand-area {
-    min-width: auto;
-  }
-
   .brand > span:last-child {
     display: none;
   }
 
   .current-project {
-    max-width: 30%;
-    font-size: 10px;
+    max-width: 29%;
+    font-size: 9px;
   }
 
   .top-actions {
@@ -672,21 +767,24 @@ button {
   }
 
   .top-actions button {
-    height: 32px;
+    height: 31px;
     padding: 0 8px;
     font-size: 9px;
   }
 
-  .editor-toolbar,
+  .editor-toolbar {
+    height: 37px;
+    min-height: 37px;
+  }
+
   .file-explorer {
-    height: 38px;
-    min-height: 38px;
+    height: 37px;
   }
 
   .file {
-    height: 38px;
+    height: 37px;
     padding: 0 9px;
-    font-size: 10px;
+    font-size: 9px;
   }
 
   .language {
@@ -696,12 +794,12 @@ button {
   .line-numbers {
     width: 34px;
     padding-right: 6px;
-    font-size: 11px;
+    font-size: 10px;
   }
 
   #codeEditor {
     padding: 14px 10px;
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .chat-panel {
@@ -712,27 +810,37 @@ button {
     margin-bottom: 6px;
   }
 
-  .chat-header span {
+  .chat-title {
+    font-size: 10px;
+  }
+
+  .chat-description {
     display: none;
   }
 
   #chatInput {
-    min-height: 45px;
-    font-size: 10px;
+    min-height: 43px;
+    max-height: 80px;
+    font-size: 9px;
+  }
+
+  .send-btn {
+    width: 30px;
+    height: 30px;
   }
 
   .side-menu {
-    width: 275px;
+    width: 270px;
   }
 
 }
 
 
-/* ================================
-   SMALL HEIGHT
-================================ */
+/* =================================
+   SMALL SCREEN HEIGHT
+================================= */
 
-@media (max-height: 650px) {
+@media (max-height: 620px) {
 
   .chat-panel {
     padding: 6px 8px;
@@ -743,13 +851,8 @@ button {
   }
 
   #chatInput {
-    min-height: 40px;
-    max-height: 70px;
+    min-height: 38px;
+    max-height: 65px;
   }
 
-  .send-btn {
-    width: 30px;
-    height: 30px;
   }
-
-   }
