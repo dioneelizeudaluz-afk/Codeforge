@@ -585,7 +585,55 @@ function escapeHTML(text) {
     .replace(/'/g, "&#039;");
 
 }
+// ==========================================
+// HOME BUTTON
+// ==========================================
 
+const homeBtn = document.getElementById("homeBtn");
+
+if (homeBtn) {
+
+  homeBtn.addEventListener("click", () => {
+
+    codeEditor.value =
+`<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeForge</title>
+</head>
+
+<body>
+
+  <h1>Bem-vindo ao CodeForge</h1>
+
+  <p>Comece a construir o seu projeto.</p>
+
+</body>
+</html>`;
+
+    currentProject = {
+      name: "Meu Projeto",
+      type: "Projeto Web",
+      files: {
+        "index.html": codeEditor.value,
+        "style.css": "",
+        "app.js": ""
+      },
+      currentFile: "index.html"
+    };
+
+    localStorage.setItem(
+      "codeforge_project",
+      JSON.stringify(currentProject)
+    );
+
+    updateProjectName();
+
+  });
+
+}
 
 // ==========================================
 // START
