@@ -467,3 +467,86 @@ button {
     padding: 10px;
   }
   }
+/* ==========================================
+   CODEFORGE - TIPOGRAFIA PROFISSIONAL
+   ========================================== */
+
+body,
+button,
+input,
+textarea,
+select {
+  color: #ffffff;
+  font-family: Inter, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+/* Títulos */
+h1,
+h2,
+h3,
+strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Texto secundário */
+small,
+.modal-description,
+.language {
+  color: #aeb7c4;
+}
+
+/* Nome do projeto */
+.project-name {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* Ficheiros */
+.file {
+  color: #d7dde6;
+  font-weight: 400;
+}
+
+.file.active {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* Editor */
+#codeEditor {
+  color: #ffffff;
+  caret-color: #ffffff;
+}
+
+/* Chat */
+#chatInput {
+  color: #ffffff;
+  caret-color: #ffffff;
+}
+
+#chatInput::placeholder {
+  color: #7d8795;
+}
+
+/* Botões */
+button {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* Select */
+select {
+  color: #ffffff;
+}
+
+select option {
+  background: #0a0d12;
+  color: #ffffff;
+  }
