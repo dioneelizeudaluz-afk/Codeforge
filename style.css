@@ -1,39 +1,27 @@
-/* ==========================================
-   CODEFORGE V2
-   PROFESSIONAL DARK EDITOR
-   ========================================== */
-
 * {
   box-sizing: border-box;
 }
 
 html,
 body {
+  margin: 0;
   width: 100%;
   height: 100%;
-  margin: 0;
-}
-
-body {
-  background: #080b10;
-  color: #ffffff;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Arial,
-    sans-serif;
-  font-size: 14px;
   overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #070b11;
+  color: #ffffff;
 }
 
 button,
-input,
 textarea,
+input,
 select {
   font-family: inherit;
+}
+
+button {
+  cursor: pointer;
 }
 
 
@@ -42,194 +30,9 @@ select {
    ========================================== */
 
 .app {
-  display: flex;
   width: 100%;
-  height: 100dvh;
-  background: #080b10;
-}
-
-
-/* ==========================================
-   SIDEBAR
-   ========================================== */
-
-.sidebar {
-  width: 230px;
-  min-width: 230px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  background: #0c1016;
-  border-right: 1px solid #202733;
-  padding: 14px 10px;
-}
-
-
-/* LOGO */
-
-.logo {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 7px;
-  margin-bottom: 18px;
-  border: 0;
-  background: transparent;
-  color: #ffffff;
-  cursor: pointer;
-  text-align: left;
-}
-
-.logo-icon {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9px;
-  background: #087cff;
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 14px;
-}
-
-.logo span {
-  font-size: 16px;
-  font-weight: 650;
-}
-
-
-/* NEW PROJECT */
-
-.new-project {
-  width: 100%;
-  border: 0;
-  border-radius: 8px;
-  padding: 11px 12px;
-  background: #087cff;
-  color: #ffffff;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: left;
-}
-
-.new-project:hover {
-  background: #006be0;
-}
-
-
-/* SECTION */
-
-.section-title {
-  margin: 25px 9px 10px;
-  color: #707b8b;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-
-/* ==========================================
-   FILE EXPLORER
-   ========================================== */
-
-.file-explorer {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.file {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 9px 10px;
-  border: 0;
-  border-radius: 7px;
-  background: transparent;
-  color: #aeb7c4;
-  cursor: pointer;
-  text-align: left;
-  font-size: 13px;
-}
-
-.file:hover {
-  background: #151b24;
-  color: #ffffff;
-}
-
-.file.active {
-  background: #18202b;
-  color: #ffffff;
-}
-
-.file-icon {
-  width: 18px;
-  text-align: center;
-  font-size: 13px;
-}
-
-
-/* NEW FILE */
-
-.new-file-button {
-  width: 100%;
-  margin-top: 9px;
-  padding: 8px 10px;
-  border: 1px dashed #303946;
-  border-radius: 7px;
-  background: transparent;
-  color: #8d98a8;
-  cursor: pointer;
-  text-align: left;
-  font-size: 12px;
-}
-
-.new-file-button:hover {
-  border-color: #087cff;
-  color: #ffffff;
-}
-
-
-/* SIDEBAR BOTTOM */
-
-.sidebar-bottom {
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.sidebar-bottom button {
-  padding: 8px 10px;
-  border: 0;
-  border-radius: 7px;
-  background: transparent;
-  color: #7f8998;
-  cursor: pointer;
-  text-align: left;
-  font-size: 12px;
-}
-
-.sidebar-bottom button:hover {
-  background: #151b24;
-  color: #ffffff;
-}
-
-
-/* ==========================================
-   MAIN
-   ========================================== */
-
-.main {
-  width: calc(100% - 230px);
-  height: 100%;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
+  height: 100vh;
+  background: #070b11;
 }
 
 
@@ -239,51 +42,107 @@ select {
 
 .topbar {
   height: 58px;
-  min-height: 58px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
-  background: #0c1016;
-  border-bottom: 1px solid #202733;
+  gap: 12px;
+  padding: 0 14px;
+  border-bottom: 1px solid #202832;
+  background: #0b1017;
+  position: relative;
+  z-index: 20;
 }
 
-.project-name {
+.top-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 150px;
+}
+
+.menu-btn {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #29323d;
+  border-radius: 8px;
+  background: #111821;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.menu-btn:active {
+  transform: scale(.96);
+}
+
+.logo {
   display: flex;
   align-items: center;
   gap: 8px;
-  min-width: 0;
+  border: 0;
+  background: transparent;
   color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 0;
+}
+
+.logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  background: #087cff;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.project-name {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #dce3eb;
   font-size: 13px;
-  font-weight: 550;
+  font-weight: 600;
+  max-width: 30%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .status {
   width: 7px;
   height: 7px;
-  flex-shrink: 0;
   border-radius: 50%;
-  background: #35c46a;
+  background: #2fd66f;
+  flex-shrink: 0;
 }
 
 .top-actions {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
+  margin-left: auto;
 }
 
 .top-actions button {
-  border: 1px solid #29313d;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid #29323d;
   border-radius: 7px;
-  padding: 8px 12px;
-  background: #11161d;
+  background: #111821;
   color: #ffffff;
-  cursor: pointer;
   font-size: 12px;
 }
 
-.top-actions button:hover {
-  border-color: #087cff;
+.top-actions button:active {
+  transform: scale(.97);
 }
 
 .top-actions .save-btn {
@@ -291,8 +150,161 @@ select {
   border-color: #087cff;
 }
 
-.top-actions .save-btn:hover {
-  background: #006be0;
+
+/* ==========================================
+   SIDE MENU
+   ========================================== */
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 285px;
+  max-width: 86vw;
+  height: 100vh;
+  background: #0b1017;
+  border-right: 1px solid #29323d;
+  z-index: 100;
+  transform: translateX(-105%);
+  transition: transform .22s ease;
+  padding: 18px 14px;
+  overflow-y: auto;
+}
+
+.side-menu.open {
+  transform: translateX(0);
+}
+
+.menu-header {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  color: #ffffff;
+}
+
+.menu-header strong {
+  font-size: 17px;
+}
+
+.menu-header button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #29323d;
+  border-radius: 7px;
+  background: #111821;
+  color: #ffffff;
+  font-size: 21px;
+}
+
+.menu-new-project {
+  width: 100%;
+  height: 42px;
+  border: 0;
+  border-radius: 8px;
+  background: #087cff;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 22px;
+}
+
+.menu-new-project:active {
+  transform: scale(.98);
+}
+
+.menu-section-title {
+  color: #7e8996;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  margin: 0 5px 9px;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.project-item {
+  width: 100%;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: #cbd3dc;
+  text-align: left;
+  font-size: 13px;
+}
+
+.project-item:hover,
+.project-item.active {
+  background: #131b25;
+  border-color: #26313d;
+  color: #ffffff;
+}
+
+.project-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #087cff;
+  flex-shrink: 0;
+}
+
+.project-item-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.delete-project-btn {
+  width: 100%;
+  min-height: 42px;
+  margin-top: 24px;
+  border: 1px solid #493039;
+  border-radius: 8px;
+  background: #171015;
+  color: #ff9ca9;
+  font-size: 12px;
+}
+
+
+/* ==========================================
+   OVERLAY
+   ========================================== */
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  z-index: 90;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease;
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* ==========================================
+   MAIN
+   ========================================== */
+
+.main {
+  width: 100%;
+  height: calc(100vh - 58px);
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -301,59 +313,86 @@ select {
    ========================================== */
 
 .editor-area {
-  min-height: 0;
   flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  background: #080b10;
+  background: #080c12;
 }
 
 .editor-header {
-  height: 38px;
-  min-height: 38px;
+  min-height: 42px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 13px;
-  background: #0c1016;
-  border-bottom: 1px solid #202733;
-  color: #d7dde6;
-  font-size: 12px;
+  border-bottom: 1px solid #202832;
+  background: #0b1017;
+  padding-right: 12px;
+}
+
+.file-tabs {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.file-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.file {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 12px;
+  border: 0;
+  border-right: 1px solid #202832;
+  background: transparent;
+  color: #7f8996;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.file.active {
+  background: #101720;
+  color: #ffffff;
+  box-shadow: inset 0 -2px 0 #087cff;
+}
+
+.file-icon {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.file-name {
+  font-size: 11px;
 }
 
 .language {
-  color: #6f7a89;
+  color: #778391;
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 #codeEditor {
-  width: 100%;
-  height: 100%;
-  min-height: 0;
   flex: 1;
-  padding: 17px;
-  border: 0;
-  outline: 0;
+  width: 100%;
+  min-height: 0;
   resize: none;
-  background: #080b10;
-  color: #ffffff;
-  caret-color: #ffffff;
-  font-family:
-    "SFMono-Regular",
-    Consolas,
-    "Liberation Mono",
-    Menlo,
-    monospace;
+  outline: none;
+  border: 0;
+  padding: 18px;
+  background: #080c12;
+  color: #f4f7fa;
+  font-family: "Courier New", Consolas, monospace;
   font-size: 13px;
-  line-height: 1.7;
+  line-height: 1.65;
   tab-size: 2;
+  white-space: pre;
   overflow: auto;
-}
-
-#codeEditor::selection {
-  background: #164f91;
 }
 
 
@@ -362,251 +401,39 @@ select {
    ========================================== */
 
 .chat {
-  height: 145px;
-  min-height: 145px;
-  padding: 11px 13px;
-  background: #0c1016;
-  border-top: 1px solid #202733;
+  flex-shrink: 0;
+  border-top: 1px solid #202832;
+  background: #0b1017;
+  padding: 10px 12px 12px;
 }
 
 .chat-title {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 8px;
 }
 
 .chat-title strong {
-  color: #ffffff;
   font-size: 12px;
-  font-weight: 600;
+  color: #ffffff;
 }
 
 .chat-title small {
-  color: #6f7a89;
+  color: #697583;
   font-size: 10px;
 }
 
 .chat-input-area {
+  position: relative;
   width: 100%;
-  height: 78px;
-  display: flex;
-  gap: 8px;
 }
 
 #chatInput {
+  display: block;
   width: 100%;
-  height: 100%;
-  min-width: 0;
-  padding: 10px;
-  border: 1px solid #29313d;
-  border-radius: 8px;
-  outline: 0;
-  resize: none;
-  background: #080b10;
-  color: #ffffff;
-  caret-color: #ffffff;
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-#chatInput:focus {
-  border-color: #087cff;
-}
-
-#chatInput::placeholder {
-  color: #687384;
-}
-
-.send-btn {
-  width: 43px;
-  min-width: 43px;
-  height: 100%;
-  border: 0;
-  border-radius: 8px;
-  background: #087cff;
-  color: #ffffff;
-  cursor: pointer;
-  font-size: 17px;
-}
-
-.send-btn:hover {
-  background: #006be0;
-}
-
-
-/* ==========================================
-   MOBILE
-   ========================================== */
-
-@media (max-width: 700px) {
-
-  body {
-    overflow: hidden;
-  }
-
-  .app {
-    width: 100vw;
-    height: 100dvh;
-  }
-
-  .sidebar {
-    width: 58px;
-    min-width: 58px;
-    padding: 10px 7px;
-  }
-
-  .logo {
-    justify-content: center;
-    padding: 0;
-    margin-bottom: 14px;
-  }
-
-  .logo span {
-    display: none;
-  }
-
-  .logo-icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .new-project {
-    width: 40px;
-    height: 40px;
-    margin: 0 auto 14px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0;
-    text-align: center;
-  }
-
-  .new-project::before {
-    content: "+";
-    color: #ffffff;
-    font-size: 25px;
-    font-weight: 400;
-  }
-
-  .section-title {
-    display: none;
-  }
-
-  .file-explorer {
-    gap: 4px;
-  }
-
-  .file {
-    width: 40px;
-    height: 40px;
-    margin: 0 auto;
-    padding: 0;
-    justify-content: center;
-    font-size: 0;
-  }
-
-  .file-icon {
-    font-size: 15px;
-  }
-
-  .file-name {
-    display: none;
-  }
-
-  .new-file-button {
-    width: 40px;
-    height: 36px;
-    margin: 7px auto 0;
-    padding: 0;
-    font-size: 0;
-    text-align: center;
-  }
-
-  .new-file-button::before {
-    content: "+";
-    color: #8d98a8;
-    font-size: 19px;
-  }
-
-  .sidebar-bottom {
-    display: none;
-  }
-
-  .main {
-    width: calc(100vw - 58px);
-    height: 100dvh;
-    min-width: 0;
-  }
-
-  .topbar {
-    height: 54px;
-    min-height: 54px;
-    padding: 0 8px;
-  }
-
-  .project-name {
-    max-width: 125px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-size: 11px;
-  }
-
-  .top-actions {
-    gap: 4px;
-  }
-
-  .top-actions button {
-    padding: 7px 8px;
-    font-size: 10px;
-  }
-
-  .editor-header {
-    height: 35px;
-    min-height: 35px;
-    padding: 0 9px;
-  }
-
-  #codeEditor {
-    padding: 12px;
-    font-size: 11px;
-    line-height: 1.6;
-  }
-
-  .chat {
-    height: 132px;
-    min-height: 132px;
-    padding: 8px;
-  }
-
-  .chat-title {
-    margin-bottom: 6px;
-  }
-
-  .chat-title strong {
-    font-size: 11px;
-  }
-
-  .chat-title small {
-    font-size: 9px;
-  }
-
-  .chat-input-area {
-    height: 72px;
-    gap: 5px;
-  }
-
-  #chatInput {
-    font-size: 11px;
-    padding: 9px;
-  }
-
-  .send-btn {
-    width: 38px;
-    min-width: 38px;
-    font-size: 15px;
-  }
-
-}
+  min-height: 48px;
+  max-height: 100px;
+  resize: vertical;
+  outline: none;
+  border: 1px solid #293
