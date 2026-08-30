@@ -1,10 +1,7 @@
 // ==========================================
-// CODEFORGE V4
-// MOBILE MENU + MULTI PROJECTS
+// CODEFORGE V3
+// MULTI PROJECT ENGINE
 // ==========================================
-
-const STORAGE_KEY = "codeforge_projects_v4";
-const ACTIVE_KEY = "codeforge_active_project_v4";
 
 const codeEditor = document.getElementById("codeEditor");
 const chatInput = document.getElementById("chatInput");
@@ -13,16 +10,8 @@ const sendBtn = document.getElementById("sendBtn");
 const saveBtn = document.getElementById("saveBtn");
 const previewBtn = document.getElementById("previewBtn");
 
-const menuBtn = document.getElementById("menuBtn");
-const closeMenuBtn = document.getElementById("closeMenuBtn");
-const sideMenu = document.getElementById("sideMenu");
-const menuOverlay = document.getElementById("menuOverlay");
-
 const newProjectBtn = document.getElementById("newProject");
 const newFileBtn = document.getElementById("newFileBtn");
-const deleteProjectBtn =
-  document.getElementById("deleteProjectBtn");
-
 const homeBtn = document.getElementById("homeBtn");
 
 const fileExplorer =
@@ -34,8 +23,22 @@ const projectList =
 const projectName =
   document.getElementById("projectName");
 
+const currentFileName =
+  document.getElementById("currentFileName");
+
 const currentLanguage =
   document.getElementById("currentLanguage");
+
+
+// ==========================================
+// STORAGE
+// ==========================================
+
+const STORAGE_KEY =
+  "codeforge_projects_v3";
+
+const ACTIVE_KEY =
+  "codeforge_active_project_v3";
 
 
 // ==========================================
@@ -51,6 +54,7 @@ function createDefaultFiles(name) {
 <html lang="pt">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -64,21 +68,25 @@ function createDefaultFiles(name) {
     rel="stylesheet"
     href="style.css"
   >
+
 </head>
 
 <body>
 
   <main>
+
     <h1>${escapeHTML(name)}</h1>
 
     <p>
       Projeto criado no CodeForge.
     </p>
+
   </main>
 
   <script src="app.js"></script>
 
 </body>
+
 </html>`,
 
     "style.css":
@@ -108,10 +116,10 @@ main {
 
 
 // ==========================================
-// CREATE PROJECT OBJECT
+// CREATE PROJECT
 // ==========================================
 
-function createProject(name, type) {
+function makeProject(name, type) {
 
   return {
 
@@ -143,74 +151,80 @@ function createProject(name, type) {
 function loadProjects() {
 
   const saved =
-    localStorage.getItem(STORAGE_KEY);
+    localStorage.getItem(
+      STORAGE_KEY
+    );
+
 
   if (!saved) {
 
     const firstProject =
-      createProject(
+      makeProject(
         "Meu Projeto",
         "Projeto Web"
       );
 
+
+    const projects = [
+      firstProject
+    ];
+
+
     localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify([firstProject])
+      JSON.stringify(projects)
     );
+
 
     localStorage.setItem(
       ACTIVE_KEY,
       firstProject.id
     );
 
-    return [firstProject];
+
+    return projects;
 
   }
 
+
   try {
 
-    const data =
-      JSON.parse(saved);
-
-    if (
-      !Array.isArray(data) ||
-      data.length === 0
-    ) {
-
-      throw new Error(
-        "Projetos inválidos"
-      );
-
-    }
-
-    return data;
+    return JSON.parse(saved);
 
   } catch {
 
     const firstProject =
-      createProject(
+      makeProject(
         "Meu Projeto",
         "Projeto Web"
       );
 
+
     localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify([firstProject])
+      JSON.stringify([
+        firstProject
+      ])
     );
+
 
     localStorage.setItem(
       ACTIVE_KEY,
       firstProject.id
     );
 
-    return [firstProject];
+
+    return [
+      firstProject
+    ];
 
   }
 
 }
 
 
-let projects = loadProjects();
+let projects =
+  loadProjects();
 
 
 // ==========================================
@@ -218,7 +232,10 @@ let projects = loadProjects();
 // ==========================================
 
 let activeProjectId =
-  localStorage.getItem(ACTIVE_KEY);
+  localStorage.getItem(
+    ACTIVE_KEY
+  );
+
 
 let currentProject =
   projects.find(
@@ -229,16 +246,22 @@ let currentProject =
 
 if (!currentProject) {
 
-  currentProject = projects[0];
+  currentProject =
+    projects[0];
 
   activeProjectId =
     currentProject.id;
+
+  localStorage.setItem(
+    ACTIVE_KEY,
+    activeProjectId
+  );
 
 }
 
 
 // ==========================================
-// STORAGE
+// SAVE ALL PROJECTS
 // ==========================================
 
 function saveAllProjects() {
@@ -262,77 +285,17 @@ function saveAllProjects() {
 
 function saveCurrentFile() {
 
-  if (
-    !currentProject ||
-    !currentProject.files ||
-    !codeEditor
-  ) {
+  if (!currentProject) {
     return;
   }
+
 
   currentProject.files[
     currentProject.currentFile
   ] = codeEditor.value;
 
-}
 
-
-// ==========================================
-// OPEN MENU
-// ==========================================
-
-function openMenu() {
-
-  sideMenu.classList.add("open");
-
-  menuOverlay.classList.add("open");
-
-}
-
-
-// ==========================================
-// CLOSE MENU
-// ==========================================
-
-function closeMenu() {
-
-  sideMenu.classList.remove("open");
-
-  menuOverlay.classList.remove("open");
-
-}
-
-
-// ==========================================
-// MENU EVENTS
-// ==========================================
-
-if (menuBtn) {
-
-  menuBtn.addEventListener(
-    "click",
-    openMenu
-  );
-
-}
-
-
-if (closeMenuBtn) {
-
-  closeMenuBtn.addEventListener(
-    "click",
-    closeMenu
-  );
-
-}
-
-
-if (menuOverlay) {
-
-  menuOverlay.addEventListener(
-    "click",
-    closeMenu
-  );
+  saveAllProjects();
 
 }
 
@@ -345,16 +308,21 @@ function renderProjects() {
 
   projectList.innerHTML = "";
 
+
   projects.forEach(
-    project => {
+    (project) => {
 
       const button =
-        document.createElement("button");
+        document.createElement(
+          "button"
+        );
+
 
       button.type = "button";
 
       button.className =
         "project-item";
+
 
       if (
         project.id ===
@@ -367,6 +335,7 @@ function renderProjects() {
 
       }
 
+
       button.innerHTML = `
 
         <span class="project-dot"></span>
@@ -377,16 +346,15 @@ function renderProjects() {
 
       `;
 
-      button.addEventListener(
-        "click",
-        () => {
 
-          switchProject(
-            project.id
-          );
+      button.onclick = () => {
 
-        }
-      );
+        switchProject(
+          project.id
+        );
+
+      };
+
 
       projectList.appendChild(
         button
@@ -406,39 +374,31 @@ function switchProject(projectId) {
 
   saveCurrentFile();
 
-  saveAllProjects();
 
-
-  const selectedProject =
+  const project =
     projects.find(
-      project =>
-        project.id === projectId
+      item =>
+        item.id === projectId
     );
 
 
-  if (!selectedProject) {
+  if (!project) {
     return;
   }
 
 
   currentProject =
-    selectedProject;
+    project;
 
 
   activeProjectId =
-    selectedProject.id;
+    project.id;
 
 
   saveAllProjects();
 
-  updateInterface();
 
-  closeMenu();
-
-
-  showMessage(
-    "Projeto aberto."
-  );
+  updateProjectInterface();
 
 }
 
@@ -447,7 +407,7 @@ function switchProject(projectId) {
 // UPDATE INTERFACE
 // ==========================================
 
-function updateInterface() {
+function updateProjectInterface() {
 
   updateProjectName();
 
@@ -457,15 +417,14 @@ function updateInterface() {
 
   openFile(
     currentProject.currentFile ||
-    "index.html",
-    false
+    "index.html"
   );
 
 }
 
 
 // ==========================================
-// UPDATE PROJECT NAME
+// PROJECT NAME
 // ==========================================
 
 function updateProjectName() {
@@ -474,7 +433,9 @@ function updateProjectName() {
 
     <span class="status"></span>
 
-    ${escapeHTML(currentProject.name)}
+    ${escapeHTML(
+      currentProject.name
+    )}
 
   `;
 
@@ -547,13 +508,17 @@ function renderFiles() {
 
   fileExplorer.innerHTML = "";
 
+
   Object.keys(
     currentProject.files
   ).forEach(
-    fileName => {
+    (fileName) => {
 
       const button =
-        document.createElement("button");
+        document.createElement(
+          "button"
+        );
+
 
       button.type = "button";
 
@@ -585,14 +550,11 @@ function renderFiles() {
       `;
 
 
-      button.addEventListener(
-        "click",
-        () => {
+      button.onclick = () => {
 
-          openFile(fileName);
+        openFile(fileName);
 
-        }
-      );
+      };
 
 
       fileExplorer.appendChild(
@@ -609,10 +571,7 @@ function renderFiles() {
 // OPEN FILE
 // ==========================================
 
-function openFile(
-  fileName,
-  shouldSave = true
-) {
+function openFile(fileName) {
 
   if (
     currentProject.files[
@@ -625,11 +584,7 @@ function openFile(
   }
 
 
-  if (shouldSave) {
-
-    saveCurrentFile();
-
-  }
+  saveCurrentFile();
 
 
   currentProject.currentFile =
@@ -642,17 +597,24 @@ function openFile(
     ];
 
 
+  currentFileName.textContent =
+    fileName;
+
+
   currentLanguage.textContent =
     getLanguage(fileName);
 
 
   renderFiles();
 
+
+  saveAllProjects();
+
 }
 
 
 // ==========================================
-// NEW PROJECT
+// NEW PROJECT MODAL
 // ==========================================
 
 function openNewProject() {
@@ -662,13 +624,17 @@ function openNewProject() {
       "projectModal"
     );
 
+
   if (oldModal) {
     oldModal.remove();
   }
 
 
   const modal =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
+
 
   modal.id =
     "projectModal";
@@ -678,7 +644,14 @@ function openNewProject() {
 
     <div class="cf-modal">
 
-      <div class="cf-modal-header">
+      <div
+        class="cf-modal-header"
+        style="
+          display:flex;
+          align-items:center;
+          justify-content:space-between;
+        "
+      >
 
         <h2>Novo projeto</h2>
 
@@ -691,9 +664,11 @@ function openNewProject() {
 
       </div>
 
+
       <p>
         Crie um novo projeto no CodeForge.
       </p>
+
 
       <label>
         Nome do projeto
@@ -705,6 +680,7 @@ function openNewProject() {
         placeholder="Ex: Achados MZ"
       >
 
+
       <label>
         Tipo de projeto
       </label>
@@ -713,15 +689,36 @@ function openNewProject() {
         id="projectTypeInput"
       >
 
-        <option>Projeto Web</option>
-        <option>Landing Page</option>
-        <option>Página de Vendas</option>
-        <option>Dashboard</option>
-        <option>App Financeiro</option>
-        <option>SaaS</option>
-        <option>Projeto em Branco</option>
+        <option>
+          Projeto Web
+        </option>
+
+        <option>
+          Landing Page
+        </option>
+
+        <option>
+          Página de Vendas
+        </option>
+
+        <option>
+          Dashboard
+        </option>
+
+        <option>
+          App Financeiro
+        </option>
+
+        <option>
+          SaaS
+        </option>
+
+        <option>
+          Projeto em Branco
+        </option>
 
       </select>
+
 
       <button
         id="createProjectButton"
@@ -740,51 +737,93 @@ function openNewProject() {
   );
 
 
-  modal.style.position = "fixed";
+  modal.style.position =
+    "fixed";
+
   modal.style.inset = "0";
-  modal.style.zIndex = "99999";
+
+  modal.style.zIndex =
+    "99999";
+
   modal.style.background =
     "rgba(0,0,0,.78)";
-  modal.style.display = "flex";
-  modal.style.alignItems = "center";
-  modal.style.justifyContent = "center";
-  modal.style.padding = "20px";
+
+  modal.style.display =
+    "flex";
+
+  modal.style.alignItems =
+    "center";
+
+  modal.style.justifyContent =
+    "center";
+
+  modal.style.padding =
+    "20px";
 
 
   const box =
-    modal.querySelector(".cf-modal");
+    modal.querySelector(
+      ".cf-modal"
+    );
 
 
-  box.style.width = "100%";
-  box.style.maxWidth = "430px";
-  box.style.background = "#0d1117";
+  box.style.width =
+    "100%";
+
+  box.style.maxWidth =
+    "430px";
+
+  box.style.background =
+    "#0d1117";
+
   box.style.border =
     "1px solid #29313d";
-  box.style.borderRadius = "14px";
-  box.style.padding = "20px";
-  box.style.color = "#ffffff";
+
+  box.style.borderRadius =
+    "14px";
+
+  box.style.padding =
+    "20px";
+
+  box.style.color =
+    "#ffffff";
 
 
-  modal
-    .querySelectorAll(
+  const inputs =
+    modal.querySelectorAll(
       "input, select"
-    )
-    .forEach(
-      input => {
-
-        input.style.width = "100%";
-        input.style.marginTop = "7px";
-        input.style.padding = "12px";
-        input.style.border =
-          "1px solid #29313d";
-        input.style.borderRadius = "8px";
-        input.style.background = "#080b10";
-        input.style.color = "#ffffff";
-        input.style.boxSizing =
-          "border-box";
-
-      }
     );
+
+
+  inputs.forEach(
+    input => {
+
+      input.style.width =
+        "100%";
+
+      input.style.marginTop =
+        "7px";
+
+      input.style.padding =
+        "12px";
+
+      input.style.border =
+        "1px solid #29313d";
+
+      input.style.borderRadius =
+        "8px";
+
+      input.style.background =
+        "#080b10";
+
+      input.style.color =
+        "#ffffff";
+
+      input.style.boxSizing =
+        "border-box";
+
+    }
+  );
 
 
   const createButton =
@@ -793,13 +832,26 @@ function openNewProject() {
     );
 
 
-  createButton.style.width = "100%";
-  createButton.style.marginTop = "20px";
-  createButton.style.padding = "13px";
-  createButton.style.border = "0";
-  createButton.style.borderRadius = "8px";
-  createButton.style.background = "#087cff";
-  createButton.style.color = "#ffffff";
+  createButton.style.width =
+    "100%";
+
+  createButton.style.marginTop =
+    "20px";
+
+  createButton.style.padding =
+    "13px";
+
+  createButton.style.border =
+    "0";
+
+  createButton.style.borderRadius =
+    "8px";
+
+  createButton.style.background =
+    "#087cff";
+
+  createButton.style.color =
+    "#ffffff";
 
 
   document
@@ -854,7 +906,7 @@ function createProject() {
 
 
   const newProject =
-    createProjectObject(
+    makeProject(
       name,
       type
     );
@@ -875,15 +927,15 @@ function createProject() {
 
   saveAllProjects();
 
-  updateInterface();
 
-  closeMenu();
+  updateProjectInterface();
 
 
   const modal =
     document.getElementById(
       "projectModal"
     );
+
 
   if (modal) {
     modal.remove();
@@ -898,17 +950,62 @@ function createProject() {
 
 
 // ==========================================
-// PROJECT OBJECT HELPER
+// NEW FILE
 // ==========================================
 
-function createProjectObject(
-  name,
-  type
-) {
+function createNewFile() {
 
-  return createProject(
-    name,
-    type
+  const fileName =
+    prompt(
+      "Nome do novo ficheiro:\nEx: contacto.html"
+    );
+
+
+  if (!fileName) {
+    return;
+  }
+
+
+  const cleanName =
+    fileName.trim();
+
+
+  if (!cleanName) {
+    return;
+  }
+
+
+  if (
+    currentProject.files[
+      cleanName
+    ] !== undefined
+  ) {
+
+    alert(
+      "Esse ficheiro já existe."
+    );
+
+    return;
+
+  }
+
+
+  currentProject.files[
+    cleanName
+  ] = "";
+
+
+  saveAllProjects();
+
+  renderFiles();
+
+  openFile(
+    cleanName
+  );
+
+
+  showMessage(
+    "Ficheiro criado."
   );
 
 }
@@ -918,11 +1015,9 @@ function createProjectObject(
 // DELETE PROJECT
 // ==========================================
 
-function deleteCurrentProject() {
+function deleteProject(projectId) {
 
-  if (
-    projects.length <= 1
-  ) {
+  if (projects.length <= 1) {
 
     alert(
       "Não podes apagar o último projeto."
@@ -933,9 +1028,21 @@ function deleteCurrentProject() {
   }
 
 
+  const project =
+    projects.find(
+      item =>
+        item.id === projectId
+    );
+
+
+  if (!project) {
+    return;
+  }
+
+
   const confirmed =
     confirm(
-      `Apagar o projeto "${currentProject.name}"?`
+      `Apagar o projeto "${project.name}"?`
     );
 
 
@@ -946,9 +1053,8 @@ function deleteCurrentProject() {
 
   projects =
     projects.filter(
-      project =>
-        project.id !==
-        currentProject.id
+      item =>
+        item.id !== projectId
     );
 
 
@@ -956,116 +1062,13 @@ function deleteCurrentProject() {
     projects[0];
 
 
-  activeProjectId =
-    currentProject.id;
-
-
   saveAllProjects();
 
-  updateInterface();
-
-  closeMenu();
+  updateProjectInterface();
 
 
   showMessage(
     "Projeto apagado."
-  );
-
-}
-
-
-// ==========================================
-// DELETE BUTTON
-// ==========================================
-
-if (deleteProjectBtn) {
-
-  deleteProjectBtn.addEventListener(
-    "click",
-    deleteCurrentProject
-  );
-
-}
-
-
-// ==========================================
-// NEW FILE
-// ==========================================
-
-if (newFileBtn) {
-
-  newFileBtn.addEventListener(
-    "click",
-    () => {
-
-      const fileName =
-        prompt(
-          "Nome do novo ficheiro:\nEx: contacto.html"
-        );
-
-
-      if (!fileName) {
-        return;
-      }
-
-
-      const cleanName =
-        fileName.trim();
-
-
-      if (!cleanName) {
-        return;
-      }
-
-
-      if (
-        currentProject.files[
-          cleanName
-        ] !== undefined
-      ) {
-
-        alert(
-          "Esse ficheiro já existe."
-        );
-
-        return;
-
-      }
-
-
-      currentProject.files[
-        cleanName
-      ] = "";
-
-
-      saveAllProjects();
-
-      renderFiles();
-
-      openFile(
-        cleanName
-      );
-
-
-      showMessage(
-        "Ficheiro criado."
-      );
-
-    }
-  );
-
-}
-
-
-// ==========================================
-// NEW PROJECT BUTTON
-// ==========================================
-
-if (newProjectBtn) {
-
-  newProjectBtn.addEventListener(
-    "click",
-    openNewProject
   );
 
 }
@@ -1077,27 +1080,209 @@ if (newProjectBtn) {
 
 if (saveBtn) {
 
-  saveBtn.addEventListener(
-    "click",
-    () => {
+  saveBtn.onclick = () => {
 
-      saveCurrentFile();
+    saveCurrentFile();
 
-      saveAllProjects();
+    showMessage(
+      "Projeto salvo."
+    );
 
-
-      showMessage(
-        "Projeto salvo."
-      );
-
-    }
-  );
+  };
 
 }
 
 
 // ==========================================
-// EDITOR AUTO UPDATE
+// NEW PROJECT
+// ==========================================
+
+if (newProjectBtn) {
+
+  newProjectBtn.onclick = () => {
+
+    openNewProject();
+
+  };
+
+}
+
+
+// ==========================================
+// NEW FILE
+// ==========================================
+
+if (newFileBtn) {
+
+  newFileBtn.onclick = () => {
+
+    createNewFile();
+
+  };
+
+}
+
+
+// ==========================================
+// HOME
+// ==========================================
+
+if (homeBtn) {
+
+  homeBtn.onclick = () => {
+
+    currentProject =
+      projects[0];
+
+
+    activeProjectId =
+      currentProject.id;
+
+
+    saveAllProjects();
+
+    updateProjectInterface();
+
+
+    showMessage(
+      "Projeto inicial carregado."
+    );
+
+  };
+
+}
+
+
+// ==========================================
+// CHAT
+// ==========================================
+
+if (sendBtn) {
+
+  sendBtn.onclick = () => {
+
+    const content =
+      chatInput.value.trim();
+
+
+    if (!content) {
+
+      alert(
+        "Cole algum código no chat."
+      );
+
+      return;
+
+    }
+
+
+    codeEditor.value =
+      content;
+
+
+    currentProject.files[
+      currentProject.currentFile
+    ] = content;
+
+
+    saveAllProjects();
+
+
+    chatInput.value = "";
+
+
+    showMessage(
+      "Código importado."
+    );
+
+  };
+
+}
+
+
+// ==========================================
+// PREVIEW
+// ==========================================
+
+if (previewBtn) {
+
+  previewBtn.onclick = () => {
+
+    saveCurrentFile();
+
+
+    const html =
+      currentProject.files[
+        "index.html"
+      ] || "";
+
+
+    const css =
+      currentProject.files[
+        "style.css"
+      ] || "";
+
+
+    const js =
+      currentProject.files[
+        "app.js"
+      ] || "";
+
+
+    const preview =
+      window.open(
+        "",
+        "_blank"
+      );
+
+
+    if (!preview) {
+
+      alert(
+        "Permita pop-ups para usar o Preview."
+      );
+
+      return;
+
+    }
+
+
+    let page =
+      html;
+
+
+    page =
+      page.replace(
+        "</head>",
+        `<style>${css}</style></head>`
+      );
+
+
+    page =
+      page.replace(
+        "</body>",
+        `<script>${js.replace(
+          /<\/script>/gi,
+          "<\\/script>"
+        )}</script></body>`
+      );
+
+
+    preview.document.open();
+
+    preview.document.write(
+      page
+    );
+
+    preview.document.close();
+
+  };
+
+}
+
+
+// ==========================================
+// EDITOR
 // ==========================================
 
 if (codeEditor) {
@@ -1109,163 +1294,6 @@ if (codeEditor) {
       currentProject.files[
         currentProject.currentFile
       ] = codeEditor.value;
-
-    }
-  );
-
-}
-
-
-// ==========================================
-// CHAT / IMPORT CODE
-// ==========================================
-
-if (sendBtn) {
-
-  sendBtn.addEventListener(
-    "click",
-    () => {
-
-      const content =
-        chatInput.value.trim();
-
-
-      if (!content) {
-
-        alert(
-          "Cole algum código no chat."
-        );
-
-        return;
-
-      }
-
-
-      codeEditor.value =
-        content;
-
-
-      currentProject.files[
-        currentProject.currentFile
-      ] = content;
-
-
-      saveAllProjects();
-
-
-      chatInput.value = "";
-
-
-      showMessage(
-        "Código importado."
-      );
-
-    }
-  );
-
-}
-
-
-// ==========================================
-// PREVIEW
-// ==========================================
-
-if (previewBtn) {
-
-  previewBtn.addEventListener(
-    "click",
-    () => {
-
-      saveCurrentFile();
-
-      saveAllProjects();
-
-
-      const html =
-        currentProject.files[
-          "index.html"
-        ] || "";
-
-
-      const css =
-        currentProject.files[
-          "style.css"
-        ] || "";
-
-
-      const js =
-        currentProject.files[
-          "app.js"
-        ] || "";
-
-
-      const preview =
-        window.open(
-          "",
-          "_blank"
-        );
-
-
-      if (!preview) {
-
-        alert(
-          "Permita pop-ups para usar o Preview."
-        );
-
-        return;
-
-      }
-
-
-      let page = html;
-
-
-      page =
-        page.replace(
-          "</head>",
-          `<style>${css}</style></head>`
-        );
-
-
-      page =
-        page.replace(
-          "</body>",
-          `<script>${js.replace(
-            /<\/script>/gi,
-            "<\\/script>"
-          )}</script></body>`
-        );
-
-
-      preview.document.open();
-
-      preview.document.write(
-        page
-      );
-
-      preview.document.close();
-
-    }
-  );
-
-}
-
-
-// ==========================================
-// HOME
-// ==========================================
-
-if (homeBtn) {
-
-  homeBtn.addEventListener(
-    "click",
-    () => {
-
-      closeMenu();
-
-      showMessage(
-        "CodeForge"
-      );
 
     }
   );
@@ -1336,4 +1364,45 @@ function showMessage(message) {
     "100000";
 
   box.style.padding =
-    "11px 18
+    "11px 18px";
+
+  box.style.borderRadius =
+    "8px";
+
+  box.style.background =
+    "#087cff";
+
+  box.style.color =
+    "#ffffff";
+
+  box.style.fontSize =
+    "13px";
+
+
+  document.body.appendChild(
+    box
+  );
+
+
+  setTimeout(
+    () => box.remove(),
+    2200
+  );
+
+}
+
+
+// ==========================================
+// START
+// ==========================================
+
+updateProjectName();
+
+renderProjects();
+
+renderFiles();
+
+openFile(
+  currentProject.currentFile ||
+  "index.html"
+);
