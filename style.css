@@ -1,0 +1,314 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #05070a;
+  color: #ffffff;
+  height: 100vh;
+  overflow: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 240px;
+  background: #0a0d12;
+  border-right: 1px solid #1b2029;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.logo-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: #087cff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.new-project {
+  width: 100%;
+  border: 0;
+  border-radius: 9px;
+  padding: 12px;
+  background: #087cff;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.new-project:hover {
+  background: #006be0;
+}
+
+.section-title {
+  color: #687180;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.file {
+  padding: 11px;
+  border-radius: 7px;
+  color: #aab2bf;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.file.active {
+  background: #151b24;
+  color: white;
+}
+
+.file span {
+  margin-right: 7px;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+.sidebar-bottom button {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  color: #7d8795;
+  text-align: left;
+  padding: 10px 5px;
+}
+
+
+/* MAIN */
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+
+/* TOPBAR */
+
+.topbar {
+  height: 60px;
+  border-bottom: 1px solid #1b2029;
+  background: #080b10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+}
+
+.project-name {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #20d47b;
+}
+
+.top-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.top-actions button {
+  border: 1px solid #252c36;
+  background: #11161d;
+  color: #d8dee7;
+  border-radius: 7px;
+  padding: 8px 12px;
+}
+
+.top-actions .save-btn {
+  background: #087cff;
+  border-color: #087cff;
+  color: white;
+}
+
+
+/* EDITOR */
+
+.editor-area {
+  flex: 1;
+  min-height: 0;
+  background: #070a0f;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-header {
+  height: 38px;
+  border-bottom: 1px solid #1b2029;
+  background: #0c1016;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  color: #aeb7c4;
+  font-size: 12px;
+}
+
+.language {
+  color: #087cff;
+}
+
+#codeEditor {
+  flex: 1;
+  width: 100%;
+  resize: none;
+  border: 0;
+  outline: 0;
+  padding: 20px;
+  background: #070a0f;
+  color: #d9e1ec;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/* CHAT */
+
+.chat {
+  background: #0a0e14;
+  border-top: 1px solid #1b2029;
+  padding: 12px 15px;
+}
+
+.chat-title {
+  margin-bottom: 9px;
+}
+
+.chat-title strong {
+  display: block;
+  font-size: 13px;
+}
+
+.chat-title small {
+  color: #6f7886;
+  font-size: 11px;
+}
+
+.chat-input-area {
+  display: flex;
+  gap: 8px;
+}
+
+#chatInput {
+  flex: 1;
+  min-height: 50px;
+  max-height: 100px;
+  resize: vertical;
+  background: #11161d;
+  border: 1px solid #252c36;
+  border-radius: 9px;
+  outline: none;
+  padding: 12px;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+#chatInput:focus {
+  border-color: #087cff;
+}
+
+.send-btn {
+  width: 50px;
+  height: 50px;
+  border: 0;
+  border-radius: 9px;
+  background: #087cff;
+  color: white;
+  font-size: 20px;
+}
+
+.send-btn:hover {
+  background: #006be0;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+  .sidebar {
+    width: 65px;
+    padding: 12px 8px;
+  }
+
+  .logo span,
+  .new-project,
+  .section-title,
+  .file,
+  .sidebar-bottom {
+    display: none;
+  }
+
+  .logo {
+    justify-content: center;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .topbar {
+    padding: 0 10px;
+  }
+
+  .project-name {
+    font-size: 12px;
+  }
+
+  .top-actions button {
+    padding: 7px 9px;
+    font-size: 11px;
+  }
+
+  #codeEditor {
+    font-size: 12px;
+    padding: 12px;
+  }
+
+  .chat {
+    padding: 10px;
+  }
+  }
