@@ -517,17 +517,10 @@ previewBtn.addEventListener(
 // ==========================================
 
 if (newProjectBtn) {
-
-  newProjectBtn.addEventListener(
-    "click",
-    (event) => {
-
-      event.preventDefault();
-
-      openNewProjectWindow();
-
-    }
-  );
+  newProjectBtn.onclick = function () {
+    openNewProjectWindow();
+  };
+}
 
 }
 
