@@ -1,5 +1,6 @@
 // ==========================================
-// CODEFORGE - PROJECT MANAGER V1
+// CODEFORGE
+// PROJECT MANAGER V2
 // ==========================================
 
 const codeEditor = document.getElementById("codeEditor");
@@ -8,20 +9,23 @@ const sendBtn = document.getElementById("sendBtn");
 const saveBtn = document.getElementById("saveBtn");
 const previewBtn = document.getElementById("previewBtn");
 const newProjectBtn = document.getElementById("newProject");
+const homeBtn = document.getElementById("homeBtn");
 
 
 // ==========================================
-// PROJECT DATA
+// PROJECT
 // ==========================================
 
 let currentProject = {
   name: "Meu Projeto",
   type: "Projeto Web",
+
   files: {
-    "index.html": codeEditor.value,
+    "index.html": codeEditor ? codeEditor.value : "",
     "style.css": "",
     "app.js": ""
   },
+
   currentFile: "index.html"
 };
 
@@ -32,28 +36,31 @@ let currentProject = {
 
 function loadProject() {
 
-  const savedProject = localStorage.getItem("codeforge_project");
+  const saved = localStorage.getItem("codeforge_project");
 
-  if (!savedProject) {
-    return;
-  }
+  if (!saved) return;
 
   try {
 
-    currentProject = JSON.parse(savedProject);
+    currentProject = JSON.parse(saved);
 
-    const savedFile =
-      currentProject.files[currentProject.currentFile];
+    if (
+      currentProject.files &&
+      currentProject.files[currentProject.currentFile]
+    ) {
 
-    if (savedFile !== undefined) {
-      codeEditor.value = savedFile;
+      codeEditor.value =
+        currentProject.files[
+          currentProject.currentFile
+        ];
+
     }
 
     updateProjectName();
 
   } catch (error) {
 
-    console.error("Erro ao carregar projeto:", error);
+    console.error(error);
 
   }
 
@@ -61,21 +68,22 @@ function loadProject() {
 
 
 // ==========================================
-// SAVE PROJECT
+// SAVE
 // ==========================================
 
 function saveProject() {
 
-  // Guarda o conteúdo atual
-  currentProject.files[currentProject.currentFile] =
-    codeEditor.value;
+  currentProject.files[
+    currentProject.currentFile
+  ] = codeEditor.value;
 
   localStorage.setItem(
     "codeforge_project",
     JSON.stringify(currentProject)
   );
 
-  showMessage("Projeto salvo com sucesso.");
+  showMessage("Projeto salvo.");
+
 
 }
 
@@ -86,12 +94,12 @@ function saveProject() {
 
 function updateProjectName() {
 
-  const projectName =
+  const element =
     document.querySelector(".project-name");
 
-  if (!projectName) return;
+  if (!element) return;
 
-  projectName.innerHTML = `
+  element.innerHTML = `
     <span class="status"></span>
     ${escapeHTML(currentProject.name)}
   `;
@@ -100,29 +108,47 @@ function updateProjectName() {
 
 
 // ==========================================
-// CREATE PROJECT WINDOW
+// NEW PROJECT
 // ==========================================
 
-function openNewProjectWindow() {
+function openNewProject() {
 
-  const overlay = document.createElement("div");
+  const oldModal =
+    document.getElementById("projectModal");
 
-  overlay.id = "projectModal";
+  if (oldModal) {
+    oldModal.remove();
+  }
 
-  overlay.innerHTML = `
-    <div class="project-modal">
 
-      <div class="modal-header">
+  const modal =
+    document.createElement("div");
+
+  modal.id = "projectModal";
+
+
+  modal.innerHTML = `
+
+    <div class="cf-modal">
+
+      <div class="cf-modal-header">
+
         <h2>Novo projeto</h2>
 
-        <button id="closeModal">
+        <button
+          id="closeProjectModal"
+          type="button"
+        >
           ×
         </button>
+
       </div>
 
-      <p class="modal-description">
-        Crie um novo projeto para começar a desenvolver.
+
+      <p>
+        Crie um novo projeto no CodeForge.
       </p>
+
 
       <label>
         Nome do projeto
@@ -134,71 +160,147 @@ function openNewProjectWindow() {
         placeholder="Ex: Minha Landing Page"
       >
 
+
       <label>
         Tipo de projeto
       </label>
 
       <select id="projectTypeInput">
 
-        <option value="Projeto Web">
-          Projeto Web
-        </option>
+        <option>Projeto Web</option>
 
-        <option value="Landing Page">
-          Landing Page
-        </option>
+        <option>Landing Page</option>
 
-        <option value="Página de Vendas">
-          Página de Vendas
-        </option>
+        <option>Página de Vendas</option>
 
-        <option value="Dashboard">
-          Dashboard
-        </option>
+        <option>Dashboard</option>
 
-        <option value="App Financeiro">
-          App Financeiro
-        </option>
+        <option>App Financeiro</option>
 
-        <option value="SaaS">
-          SaaS
-        </option>
+        <option>SaaS</option>
 
-        <option value="Projeto em Branco">
-          Projeto em Branco
-        </option>
+        <option>Projeto em Branco</option>
 
       </select>
 
+
       <button
-        id="createProject"
-        class="create-project-button"
+        id="createProjectButton"
+        type="button"
       >
         Criar projeto
       </button>
 
     </div>
+
   `;
 
-  document.body.appendChild(overlay);
+
+  document.body.appendChild(modal);
 
 
-  // Fechar
+  // Estilo da janela
 
-  document
-    .getElementById("closeModal")
-    .addEventListener("click", () => {
+  modal.style.position = "fixed";
+  modal.style.inset = "0";
+  modal.style.zIndex = "99999";
+  modal.style.background = "rgba(0,0,0,0.75)";
+  modal.style.display = "flex";
+  modal.style.alignItems = "center";
+  modal.style.justifyContent = "center";
+  modal.style.padding = "20px";
 
-      overlay.remove();
 
-    });
+  const box =
+    modal.querySelector(".cf-modal");
+
+  box.style.width = "100%";
+  box.style.maxWidth = "430px";
+  box.style.background = "#0d1117";
+  box.style.border = "1px solid #252c36";
+  box.style.borderRadius = "14px";
+  box.style.padding = "20px";
+  box.style.color = "#ffffff";
 
 
-  // Criar
+  const header =
+    modal.querySelector(".cf-modal-header");
 
-  document
-    .getElementById("createProject")
-    .addEventListener("click", createProject);
+  header.style.display = "flex";
+  header.style.alignItems = "center";
+  header.style.justifyContent = "space-between";
+
+
+  const close =
+    document.getElementById(
+      "closeProjectModal"
+    );
+
+  close.style.background = "transparent";
+  close.style.border = "0";
+  close.style.color = "#ffffff";
+  close.style.fontSize = "26px";
+
+
+  const labels =
+    modal.querySelectorAll("label");
+
+  labels.forEach(label => {
+
+    label.style.display = "block";
+    label.style.marginTop = "18px";
+    label.style.marginBottom = "7px";
+    label.style.fontSize = "13px";
+
+  });
+
+
+  const inputs =
+    modal.querySelectorAll(
+      "input, select"
+    );
+
+  inputs.forEach(input => {
+
+    input.style.width = "100%";
+    input.style.padding = "12px";
+    input.style.borderRadius = "8px";
+    input.style.border =
+      "1px solid #29313d";
+    input.style.background = "#11161d";
+    input.style.color = "#ffffff";
+    input.style.outline = "none";
+
+  });
+
+
+  const createButton =
+    document.getElementById(
+      "createProjectButton"
+    );
+
+  createButton.style.width = "100%";
+  createButton.style.marginTop = "22px";
+  createButton.style.padding = "13px";
+  createButton.style.border = "0";
+  createButton.style.borderRadius = "8px";
+  createButton.style.background = "#087cff";
+  createButton.style.color = "#ffffff";
+  createButton.style.fontWeight = "600";
+
+
+  close.onclick = function () {
+
+    modal.remove();
+
+  };
+
+
+  createButton.onclick = function () {
+
+    createNewProject();
+
+  };
 
 }
 
@@ -207,94 +309,39 @@ function openNewProjectWindow() {
 // CREATE PROJECT
 // ==========================================
 
-function createProject() {
+function createNewProject() {
+
+  const nameInput =
+    document.getElementById(
+      "projectNameInput"
+    );
+
+  const typeInput =
+    document.getElementById(
+      "projectTypeInput"
+    );
+
 
   const name =
-    document
-      .getElementById("projectNameInput")
-      .value
-      .trim();
+    nameInput.value.trim();
 
   const type =
-    document
-      .getElementById("projectTypeInput")
-      .value;
+    typeInput.value;
 
 
   if (!name) {
 
-    alert("Digite um nome para o projeto.");
+    alert(
+      "Digite o nome do projeto."
+    );
 
     return;
 
   }
 
 
-  let files = {
-
-    "index.html": createHTMLTemplate(name),
-
-    "style.css": createCSSTemplate(),
-
-    "app.js": createJSTemplate()
-
-  };
-
-
-  // Guardar projeto
-
-  currentProject = {
-
-    name: name,
-
-    type: type,
-
-    files: files,
-
-    currentFile: "index.html"
-
-  };
-
-
-  localStorage.setItem(
-    "codeforge_project",
-    JSON.stringify(currentProject)
-  );
-
-
-  // Atualizar editor
-
-  codeEditor.value =
-    currentProject.files["index.html"];
-
-
-  updateProjectName();
-
-
-  // Fechar janela
-
-  const modal =
-    document.getElementById("projectModal");
-
-  if (modal) {
-    modal.remove();
-  }
-
-
-  showMessage(
-    `${name} criado com sucesso.`
-  );
-
-}
-
-
-// ==========================================
-// HTML TEMPLATE
-// ==========================================
-
-function createHTMLTemplate(name) {
-
-  return `<!DOCTYPE html>
+  let html =
+`<!DOCTYPE html>
 <html lang="pt">
 <head>
 
@@ -305,7 +352,7 @@ function createHTMLTemplate(name) {
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>${name}</title>
+  <title>${escapeHTML(name)}</title>
 
   <link
     rel="stylesheet"
@@ -318,10 +365,10 @@ function createHTMLTemplate(name) {
 
   <main>
 
-    <h1>${name}</h1>
+    <h1>${escapeHTML(name)}</h1>
 
     <p>
-      Projeto criado com o CodeForge.
+      Projeto criado no CodeForge.
     </p>
 
   </main>
@@ -331,16 +378,9 @@ function createHTMLTemplate(name) {
 </body>
 </html>`;
 
-}
 
-
-// ==========================================
-// CSS TEMPLATE
-// ==========================================
-
-function createCSSTemplate() {
-
-  return `* {
+  let css =
+`* {
   box-sizing: border-box;
 }
 
@@ -353,63 +393,34 @@ body {
 
 main {
   max-width: 1100px;
-  margin: 0 auto;
+  margin: auto;
   padding: 60px 20px;
-}
-
-h1 {
-  font-size: 48px;
-}
-
-p {
-  font-size: 18px;
 }`;
 
-}
+
+  let js =
+`console.log("Projeto ${escapeHTML(name)} iniciado.");`;
 
 
-// ==========================================
-// JAVASCRIPT TEMPLATE
-// ==========================================
+  currentProject = {
 
-function createJSTemplate() {
+    name: name,
 
-  return `console.log("Projeto CodeForge iniciado.");`;
+    type: type,
 
-}
+    currentFile: "index.html",
 
+    files: {
 
-// ==========================================
-// CHAT / CODE IMPORT
-// ==========================================
+      "index.html": html,
 
-sendBtn.addEventListener("click", () => {
+      "style.css": css,
 
-  const content =
-    chatInput.value.trim();
+      "app.js": js
 
+    }
 
-  if (!content) {
-
-    alert(
-      "Cole algum código ou escreva uma instrução."
-    );
-
-    return;
-
-  }
-
-
-  // Coloca o conteúdo no ficheiro atual
-
-  codeEditor.value = content;
-
-
-  // Guarda automaticamente no projeto
-
-  currentProject.files[
-    currentProject.currentFile
-  ] = content;
+  };
 
 
   localStorage.setItem(
@@ -418,33 +429,99 @@ sendBtn.addEventListener("click", () => {
   );
 
 
-  chatInput.value = "";
+  codeEditor.value = html;
+
+  updateProjectName();
+
+
+  const modal =
+    document.getElementById(
+      "projectModal"
+    );
+
+  if (modal) {
+    modal.remove();
+  }
 
 
   showMessage(
-    "Código importado para o editor."
+    "Projeto criado com sucesso."
   );
 
-});
+}
+
+
+// ==========================================
+// CHAT / IMPORT CODE
+// ==========================================
+
+if (sendBtn) {
+
+  sendBtn.onclick = function () {
+
+    const content =
+      chatInput.value.trim();
+
+
+    if (!content) {
+
+      alert(
+        "Cole algum código ou escreva algo."
+      );
+
+      return;
+
+    }
+
+
+    codeEditor.value = content;
+
+
+    currentProject.files[
+      currentProject.currentFile
+    ] = content;
+
+
+    localStorage.setItem(
+      "codeforge_project",
+      JSON.stringify(currentProject)
+    );
+
+
+    chatInput.value = "";
+
+
+    showMessage(
+      "Código importado."
+    );
+
+  };
+
+}
 
 
 // ==========================================
 // SAVE BUTTON
 // ==========================================
 
-saveBtn.addEventListener(
-  "click",
-  saveProject
-);
+if (saveBtn) {
+
+  saveBtn.onclick = function () {
+
+    saveProject();
+
+  };
+
+}
 
 
 // ==========================================
 // PREVIEW
 // ==========================================
 
-previewBtn.addEventListener(
-  "click",
-  () => {
+if (previewBtn) {
+
+  previewBtn.onclick = function () {
 
     const html =
       currentProject.files["index.html"];
@@ -457,13 +534,16 @@ previewBtn.addEventListener(
 
 
     const preview =
-      window.open("", "_blank");
+      window.open(
+        "",
+        "_blank"
+      );
 
 
     if (!preview) {
 
       alert(
-        "O navegador bloqueou a janela de Preview. Permita pop-ups para o CodeForge."
+        "Permita pop-ups para usar o Preview."
       );
 
       return;
@@ -471,15 +551,13 @@ previewBtn.addEventListener(
     }
 
 
-    let finalHTML = html;
+    let page = html;
 
-
-    // Adicionar CSS
 
     if (css) {
 
-      finalHTML =
-        finalHTML.replace(
+      page =
+        page.replace(
           "</head>",
           `<style>${css}</style></head>`
         );
@@ -487,14 +565,15 @@ previewBtn.addEventListener(
     }
 
 
-    // Adicionar JavaScript
-
     if (js) {
 
-      finalHTML =
-        finalHTML.replace(
+      page =
+        page.replace(
           "</body>",
-          `<script>${js}<\/script></body>`
+          `<script>${js.replace(
+            /<\/script>/gi,
+            "<\\/script>"
+          )}</script></body>`
         );
 
     }
@@ -502,14 +581,13 @@ previewBtn.addEventListener(
 
     preview.document.open();
 
-    preview.document.write(
-      finalHTML
-    );
+    preview.document.write(page);
 
     preview.document.close();
 
-  }
-);
+  };
+
+}
 
 
 // ==========================================
@@ -517,10 +595,83 @@ previewBtn.addEventListener(
 // ==========================================
 
 if (newProjectBtn) {
+
   newProjectBtn.onclick = function () {
-    openNewProjectWindow();
+
+    openNewProject();
+
   };
+
 }
+
+
+// ==========================================
+// HOME BUTTON
+// ==========================================
+
+if (homeBtn) {
+
+  homeBtn.onclick = function () {
+
+    currentProject = {
+
+      name: "Meu Projeto",
+
+      type: "Projeto Web",
+
+      currentFile: "index.html",
+
+      files: {
+
+        "index.html":
+`<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Meu Projeto</title>
+</head>
+
+<body>
+
+  <h1>Bem-vindo ao CodeForge</h1>
+
+  <p>
+    Comece a construir o seu projeto.
+  </p>
+
+</body>
+
+</html>`,
+
+        "style.css": "",
+
+        "app.js": ""
+
+      }
+
+    };
+
+
+    codeEditor.value =
+      currentProject.files[
+        "index.html"
+      ];
+
+
+    localStorage.setItem(
+      "codeforge_project",
+      JSON.stringify(currentProject)
+    );
+
+
+    updateProjectName();
+
+    showMessage(
+      "Projeto inicial carregado."
+    );
+
+  };
 
 }
 
@@ -531,56 +682,54 @@ if (newProjectBtn) {
 
 function showMessage(message) {
 
-  const messageBox =
+  const box =
     document.createElement("div");
 
-  messageBox.innerText = message;
+  box.textContent = message;
 
-  messageBox.style.position = "fixed";
-  messageBox.style.bottom = "20px";
-  messageBox.style.left = "50%";
-  messageBox.style.transform =
+
+  box.style.position = "fixed";
+  box.style.left = "50%";
+  box.style.bottom = "25px";
+  box.style.transform =
     "translateX(-50%)";
+  box.style.zIndex = "100000";
 
-  messageBox.style.background =
+  box.style.background =
     "#087cff";
 
-  messageBox.style.color =
+  box.style.color =
     "#ffffff";
 
-  messageBox.style.padding =
-    "12px 18px";
+  box.style.padding =
+    "11px 18px";
 
-  messageBox.style.borderRadius =
+  box.style.borderRadius =
     "8px";
 
-  messageBox.style.fontSize =
+  box.style.fontSize =
     "14px";
 
-  messageBox.style.zIndex =
-    "99999";
 
-  document.body.appendChild(
-    messageBox
-  );
+  document.body.appendChild(box);
 
 
   setTimeout(() => {
 
-    messageBox.remove();
+    box.remove();
 
-  }, 2500);
+  }, 2200);
 
 }
 
 
 // ==========================================
-// SECURITY HELPER
+// ESCAPE HTML
 // ==========================================
 
-function escapeHTML(text) {
+function escapeHTML(value) {
 
-  return text
+  return String(value)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
@@ -588,59 +737,12 @@ function escapeHTML(text) {
     .replace(/'/g, "&#039;");
 
 }
-// ==========================================
-// HOME BUTTON
-// ==========================================
 
-const homeBtn = document.getElementById("homeBtn");
-
-if (homeBtn) {
-
-  homeBtn.addEventListener("click", () => {
-
-    codeEditor.value =
-`<!DOCTYPE html>
-<html lang="pt">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CodeForge</title>
-</head>
-
-<body>
-
-  <h1>Bem-vindo ao CodeForge</h1>
-
-  <p>Comece a construir o seu projeto.</p>
-
-</body>
-</html>`;
-
-    currentProject = {
-      name: "Meu Projeto",
-      type: "Projeto Web",
-      files: {
-        "index.html": codeEditor.value,
-        "style.css": "",
-        "app.js": ""
-      },
-      currentFile: "index.html"
-    };
-
-    localStorage.setItem(
-      "codeforge_project",
-      JSON.stringify(currentProject)
-    );
-
-    updateProjectName();
-
-  });
-
-}
 
 // ==========================================
 // START
 // ==========================================
 
 loadProject();
+
 updateProjectName();
