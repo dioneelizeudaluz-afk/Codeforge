@@ -15,7 +15,7 @@
     <header class="topbar">
 
       <div class="brand-area">
-        <button id="menuBtn" class="icon-btn" type="button" aria-label="Abrir menu">
+        <button id="menuBtn" class="icon-btn" type="button">
           ☰
         </button>
 
@@ -46,126 +46,82 @@
     <aside id="sideMenu" class="side-menu">
 
       <div class="menu-top">
+
         <div class="menu-title">
           <span class="brand-mark small">&lt;/&gt;</span>
           <span>CodeForge</span>
         </div>
 
-        <button id="closeMenuBtn" class="close-btn" type="button">
+        <button
+          id="closeMenuBtn"
+          class="close-btn"
+          type="button"
+        >
           ×
         </button>
+
       </div>
 
 
-      <button id="newProject" class="new-project-btn" type="button">
+      <button
+        id="newProject"
+        class="new-project-btn"
+        type="button"
+      >
         <span>+</span>
         <span>Novo projeto</span>
       </button>
 
 
-      <div class="section-title">
-        MEUS PROJETOS
+      <div class="menu-section">
+
+        <div class="section-title">
+          PROJETOS
+        </div>
+
+        <div id="projectList" class="project-list"></div>
+
       </div>
 
 
-      <div id="projectList" class="project-list"></div>
+      <div class="menu-section files-section">
+
+        <div class="section-title">
+          FICHEIROS
+        </div>
+
+        <div class="menu-files">
+
+          <div class="menu-file">
+            <span class="menu-file-icon html-icon">◇</span>
+            <span>index.html</span>
+          </div>
+
+          <div class="menu-file">
+            <span class="menu-file-icon css-icon">#</span>
+            <span>style.css</span>
+          </div>
+
+          <div class="menu-file">
+            <span class="menu-file-icon js-icon">JS</span>
+            <span>app.js</span>
+          </div>
+
+        </div>
+
+      </div>
 
 
       <div class="menu-bottom">
 
-        <button id="deleteProjectBtn" class="delete-btn" type="button">
-          <span>🗑</span>
+        <button
+          id="deleteProjectBtn"
+          class="delete-btn"
+          type="button"
+        >
           <span>Apagar projeto</span>
         </button>
 
       </div>
 
-    </aside>
-
-
-    <div id="menuOverlay" class="menu-overlay"></div>
-
-
-    <main class="workspace">
-
-      <section class="editor-panel">
-
-        <div class="editor-toolbar">
-
-          <div id="fileExplorer" class="file-explorer"></div>
-
-          <div id="currentLanguage" class="language">
-            HTML
-          </div>
-
-        </div>
-
-
-        <div class="editor-wrapper">
-
-          <div class="line-numbers" id="lineNumbers">
-            1
-          </div>
-
-          <textarea
-            id="codeEditor"
-            spellcheck="false"
-            autocomplete="off"
-            autocorrect="off"
-            autocapitalize="off"
-            placeholder="Escreva ou cole o seu código aqui..."
-          ></textarea>
-
-        </div>
-
-      </section>
-
-
-      <section class="chat-panel">
-
-        <div class="chat-header">
-
-          <div>
-            <strong>Code Chat</strong>
-
-            <span>
-              Insira código para trabalhar no projeto
-            </span>
-          </div>
-
-        </div>
-
-
-        <div class="chat-box">
-
-          <textarea
-            id="chatInput"
-            spellcheck="false"
-            placeholder="Cole ou escreva o código aqui..."
-          ></textarea>
-
-          <button
-            id="sendBtn"
-            class="send-btn"
-            type="button"
-            aria-label="Enviar código"
-          >
-            ➤
-          </button>
-
-        </div>
-
-      </section>
-
-    </main>
-
-
-    <div id="toast" class="toast"></div>
-
-  </div>
-
-
-  <script src="app.js"></script>
-
-</body>
-</html>
+    </
