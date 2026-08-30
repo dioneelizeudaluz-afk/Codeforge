@@ -1,124 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b10">
   <title>CodeForge</title>
-
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
-
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
   <div class="app">
 
-    <!-- ======================================
-         SIDEBAR
-         ====================================== -->
+    <header class="topbar">
 
-    <aside class="sidebar">
+      <div class="brand-area">
+        <button id="menuBtn" class="icon-btn" type="button" aria-label="Abrir menu">
+          ☰
+        </button>
 
-      <button
-        class="logo"
-        id="homeBtn"
-        type="button"
-      >
+        <button id="homeBtn" class="brand" type="button">
+          <span class="brand-mark">&lt;/&gt;</span>
+          <span>CodeForge</span>
+        </button>
+      </div>
 
-        <div class="logo-icon">
-          &lt;/&gt;
+      <div id="projectName" class="current-project">
+        <span class="online-dot"></span>
+        <span>Meu Projeto</span>
+      </div>
+
+      <div class="top-actions">
+        <button id="previewBtn" class="secondary-btn" type="button">
+          Preview
+        </button>
+
+        <button id="saveBtn" class="primary-btn" type="button">
+          Salvar
+        </button>
+      </div>
+
+    </header>
+
+
+    <aside id="sideMenu" class="side-menu">
+
+      <div class="menu-top">
+        <div class="menu-title">
+          <span class="brand-mark small">&lt;/&gt;</span>
+          <span>CodeForge</span>
         </div>
 
-        <span>CodeForge</span>
+        <button id="closeMenuBtn" class="close-btn" type="button">
+          ×
+        </button>
+      </div>
 
+
+      <button id="newProject" class="new-project-btn" type="button">
+        <span>+</span>
+        <span>Novo projeto</span>
       </button>
 
-
-      <!-- NOVO PROJETO -->
-
-      <button
-        class="new-project"
-        id="newProject"
-        type="button"
-      >
-        + Novo projeto
-      </button>
-
-
-      <!-- ====================================
-           PROJECTS
-           ==================================== -->
 
       <div class="section-title">
         MEUS PROJETOS
       </div>
 
 
-      <div
-        id="projectList"
-        class="project-list"
-      >
-
-        <!-- Projetos serão criados pelo JavaScript -->
-
-      </div>
+      <div id="projectList" class="project-list"></div>
 
 
-      <!-- ====================================
-           FILES
-           ==================================== -->
+      <div class="menu-bottom">
 
-      <div class="section-title files-title">
-        FICHEIROS
-      </div>
-
-
-      <div
-        id="fileExplorer"
-        class="file-explorer"
-      >
-
-        <!-- Ficheiros serão criados pelo JavaScript -->
-
-      </div>
-
-
-      <button
-        class="new-file-button"
-        id="newFileBtn"
-        type="button"
-      >
-        + Novo ficheiro
-      </button>
-
-
-      <!-- ====================================
-           BOTTOM
-           ==================================== -->
-
-      <div class="sidebar-bottom">
-
-        <button
-          id="settingsBtn"
-          type="button"
-        >
-          Configurações
-        </button>
-
-        <button
-          id="helpBtn"
-          type="button"
-        >
-          Ajuda
+        <button id="deleteProjectBtn" class="delete-btn" type="button">
+          <span>🗑</span>
+          <span>Apagar projeto</span>
         </button>
 
       </div>
@@ -126,113 +83,72 @@
     </aside>
 
 
-    <!-- ======================================
-         MAIN
-         ====================================== -->
-
-    <main class="main">
+    <div id="menuOverlay" class="menu-overlay"></div>
 
 
-      <!-- TOPBAR -->
+    <main class="workspace">
 
-      <header class="topbar">
+      <section class="editor-panel">
 
-        <div
-          class="project-name"
-          id="projectName"
-        >
+        <div class="editor-toolbar">
 
-          <span class="status"></span>
+          <div id="fileExplorer" class="file-explorer"></div>
 
-          Meu Projeto
-
-        </div>
-
-
-        <div class="top-actions">
-
-          <button
-            id="previewBtn"
-            type="button"
-          >
-            Preview
-          </button>
-
-
-          <button
-            id="saveBtn"
-            class="save-btn"
-            type="button"
-          >
-            Salvar
-          </button>
-
-        </div>
-
-      </header>
-
-
-      <!-- ====================================
-           EDITOR
-           ==================================== -->
-
-      <section class="editor-area">
-
-        <div class="editor-header">
-
-          <span id="currentFileName">
-            index.html
-          </span>
-
-          <span
-            class="language"
-            id="currentLanguage"
-          >
+          <div id="currentLanguage" class="language">
             HTML
-          </span>
+          </div>
 
         </div>
 
 
-        <textarea
-          id="codeEditor"
-          spellcheck="false"
-        ></textarea>
+        <div class="editor-wrapper">
+
+          <div class="line-numbers" id="lineNumbers">
+            1
+          </div>
+
+          <textarea
+            id="codeEditor"
+            spellcheck="false"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            placeholder="Escreva ou cole o seu código aqui..."
+          ></textarea>
+
+        </div>
 
       </section>
 
 
-      <!-- ====================================
-           CHAT
-           ==================================== -->
+      <section class="chat-panel">
 
-      <section class="chat">
+        <div class="chat-header">
 
-        <div class="chat-title">
+          <div>
+            <strong>Code Chat</strong>
 
-          <strong>
-            Code Chat
-          </strong>
-
-          <small>
-            Cole código para importar para o projeto
-          </small>
+            <span>
+              Insira código para trabalhar no projeto
+            </span>
+          </div>
 
         </div>
 
 
-        <div class="chat-input-area">
+        <div class="chat-box">
 
           <textarea
             id="chatInput"
-            placeholder="Cole aqui o código..."
+            spellcheck="false"
+            placeholder="Cole ou escreva o código aqui..."
           ></textarea>
-
 
           <button
             id="sendBtn"
             class="send-btn"
             type="button"
+            aria-label="Enviar código"
           >
             ➤
           </button>
@@ -243,14 +159,13 @@
 
     </main>
 
+
+    <div id="toast" class="toast"></div>
+
   </div>
 
 
-  <!-- ======================================
-       SCRIPT
-       ====================================== -->
-
-  <script src="app.js?v=5"></script>
+  <script src="app.js"></script>
 
 </body>
 </html>
